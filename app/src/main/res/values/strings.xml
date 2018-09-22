@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyPassport</string>
+    <string name="sampleHobbies">Golf\nBasketball\nBaseball\nFishing\nRunning\n\nChess\nCheckers\n\Badminton\nCricket\nSquash\nWeights\nSitting\n</string>
+</resources>

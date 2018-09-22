@@ -1,0 +1,47 @@
+{
+  "profiles": {
+    "1": {
+      "age": "1",
+      "datecreated": "1",
+      "firstname": "bad",
+      "gender": "F",
+      "hobbies": "guids",
+      "lastname": "guid"
+    },
+    "-KMZ_aCNCCyvTPiVA3wJ": {
+      "age": "99",
+      "datecreated": "1537044929989",
+      "firstname": "mike",
+      "gender": "M",
+      "hobbies": "kungfu",
+      "lastname": "nelson"
+    },
+    "-KMZ_aCNCCyvTPiVA3wK": {
+      "age": "199",
+      "datecreated": "1537044929989",
+      "firstname": "oldie",
+      "gender": "M",
+      "hobbies": "vitamins",
+      "lastname": "goodie"
+    },
+    "39edb520-b9e1-11e8-b568-0800200c9a66": {
+      "age": "4",
+      "datecreated": 1537044929989,
+      "firstname": "bad",
+      "gender": "M",
+      "hobbies": "dancing",
+      "lastname": "date"
+    },
+    "-KMZ_aCNCCyvTPiVA3wO": {
+      "age": "3",
+      "datecreated": "1537044929989",
+      "firstname": "john",
+      "gender": "F",
+      "hobbies": "singing",
+      "lastname": "doe"
+    },
+    "7a1e8960-b9de-11e8-b568-0800200c9a66": {
+      "firstname": "empty"
+    }
+  }
+}

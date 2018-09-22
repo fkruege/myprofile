@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "666972046467",
+    "firebase_url": "https://passportv1-2524e.firebaseio.com",
+    "project_id": "passportv1-2524e",
+    "storage_bucket": "passportv1-2524e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666972046467:android:95c309964d083a9b",
+        "android_client_info": {
+          "package_name": "com.franctan.mypassport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666972046467-r0mcttnvbvn09l5tsq4pidfqv85esd51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDArlZsHQ34Uj7WVzA9mKaL-zQXWTuMMe4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
