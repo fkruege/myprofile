@@ -36,6 +36,18 @@ fun FbProfile.mapToProfile(key: String): Profile {
     )
 }
 
+fun Profile.mapToFbProfile(): FbProfile {
+    val profileId = this.id
+    val firstName = this.firstName
+    val lastName = this.lastName
+    val age: String = this.age.toString()
+    val gender: String = this.gender.toString()
+    val hobbies: String = this.hobbyList.joinToString(HOBBIES_DELIMITER.toString())
+    val dateCreated: String = this.dateCreated.millis.toString()
+
+    return FbProfile(firstName, lastName, age, dateCreated, gender, hobbies)
+}
+
 fun String.toHobbiesList(): List<String> {
     val trimmed = this.trim()
     return if (trimmed.isEmpty()) {

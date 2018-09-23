@@ -34,7 +34,8 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 app:srcCompat="@drawable/einstein"
-                tools:src="@drawable/einstein" />
+                tools:src="@drawable/einstein"
+                />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

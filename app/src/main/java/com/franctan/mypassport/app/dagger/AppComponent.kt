@@ -6,12 +6,13 @@ import com.franctan.mypassport.ui.main.dagger.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules =
 [
-    (AndroidInjectionModule::class)
+    (AndroidSupportInjectionModule::class)
     , (AppModule::class)
     , (FirebaseRepoModule::class)
     , (MainActivityModule::class)

@@ -39,6 +39,10 @@ dependencies {
     implementation DroidSupport.constraintLayout
     implementation DroidSupport.cardView
 
+    implementation GoogleArch.lifeCycleRuntime
+    implementation GoogleArch.lifeCycleExtensions
+    kapt GoogleArch.lifeCycleCompiler
+
     implementation Dagger.main
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:design:27.1.1'

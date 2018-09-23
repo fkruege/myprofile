@@ -1,11 +1,13 @@
 package com.franctan.firebaserepo.daos
 
 import com.franctan.firebaserepo.dagger.ProfilesDatabaseReference
+import com.franctan.firebaserepo.models.mapToFbProfile
 import com.franctan.models.Profile
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import javax.inject.Inject
@@ -43,6 +45,19 @@ class ProfilesDao
                             emitter.onSuccess(profileList)
                         }
                     })
+        }
+
+    }
+
+    fun saveProfile(profile: Profile): Completable {
+        return Completable.fromAction {
+            val fbProfile = profile.mapToFbProfile()
+
+            if (profile.id.isEmpty()) {
+                val newRecordRef = dbReference.push()
+                newRecordRef.setValue(fbProfile)
+            }
+
         }
 
     }
