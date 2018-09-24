@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -43,10 +47,10 @@ dependencies {
     implementation GoogleArch.lifeCycleExtensions
     kapt GoogleArch.lifeCycleCompiler
 
+    kapt "com.android.databinding:compiler:$dataBindingCompilerVersion"
+
+
     implementation Dagger.main
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
     kapt Dagger.compiler
     implementation Dagger.android
     implementation Dagger.androidSupport

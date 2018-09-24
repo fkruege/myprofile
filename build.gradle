@@ -1,12 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+       ext {
+        gradleVersion = '3.1.4'
+        dataBindingCompilerVersion = gradleVersion // Always need to be the same.
+    }
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
         classpath 'com.google.gms:google-services:4.0.1'
 

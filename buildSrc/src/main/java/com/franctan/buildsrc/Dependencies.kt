@@ -1,3 +1,9 @@
+object Gradle {
+    val version = "3.1.4"
+}
+
+
+
 object Kotlin {
     val version = "1.2.50"
     val serializationVersion = "0.6.0"
@@ -53,6 +59,7 @@ object GoogleArch {
     val lifeCycleVersion = "1.1.1"
     val testingVersion = "1.1.1"
     val workManagerVersion = "1.0.0-alpha08"
+    val databindingVersion = "2.3.0"
 
     val roomRuntime = "android.arch.persistence.room:runtime:$roomVersion"
     val roomCompiler = "android.arch.persistence.room:compiler:$roomVersion"
@@ -63,6 +70,8 @@ object GoogleArch {
     val lifeCycleExtensions = "android.arch.lifecycle:extensions:$lifeCycleVersion"
 
     val workManagerRuntime = "android.arch.work:work-runtime-ktx:$workManagerVersion"
+
+    val databinding = "com.android.databinding:compiler:$databindingVersion"
 }
 
 
