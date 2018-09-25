@@ -1,8 +1,10 @@
 package com.franctan.mypassport.ui.main.dagger
 
+import android.app.Activity
 import com.franctan.mypassport.ui.main.MainActivity
-import com.franctan.mypassport.ui.main.editprofilefragment.EditProfileFragment
+import com.franctan.mypassport.ui.main.editprofilefragment.dagger.EditProfileFragmentModule
 import com.franctan.mypassport.ui.main.listprofilesfragment.ListProfilesFragment
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,9 +12,16 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class MainActivityModule {
 
-    @ContributesAndroidInjector(modules = [(ListProfilesFragmentModule::class), (EditProfileFragmentModule::class)])
+    @ContributesAndroidInjector(modules = [(MainActivityBindsModule::class)
+        , (ListProfilesFragmentModule::class), (EditProfileFragmentModule::class)])
     abstract fun contributeMainActivity(): MainActivity
 
+}
+
+@Module
+abstract class MainActivityBindsModule {
+    @Binds
+    abstract fun bindMainActivityToActivity(activity: MainActivity): Activity
 }
 
 @Module
@@ -22,9 +31,4 @@ abstract class ListProfilesFragmentModule {
 
 }
 
-@Module
-abstract class EditProfileFragmentModule {
-    @ContributesAndroidInjector
-    abstract fun contributesEditProfileFragment(): EditProfileFragment
 
-}

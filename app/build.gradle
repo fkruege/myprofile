@@ -45,10 +45,12 @@ dependencies {
 
     implementation GoogleArch.lifeCycleRuntime
     implementation GoogleArch.lifeCycleExtensions
-    kapt GoogleArch.lifeCycleCompiler
+//    kapt GoogleArch.lifeCycleCompiler
 
-    kapt "com.android.databinding:compiler:$dataBindingCompilerVersion"
+//    kapt "com.android.databinding:compiler:$dataBindingCompilerVersion"
 
+    implementation Glide.main
+    kapt Glide.compiler
 
     implementation Dagger.main
     kapt Dagger.compiler

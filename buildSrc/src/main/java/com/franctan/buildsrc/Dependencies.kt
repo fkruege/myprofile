@@ -158,7 +158,7 @@ object UI {
 }
 
 object Glide {
-    val glideVersion = "4.7.1"
+    val glideVersion = "4.8.0"
 
     val main = "com.github.bumptech.glide:glide:$glideVersion"
     val compiler = "com.github.bumptech.glide:compiler:$glideVersion"
