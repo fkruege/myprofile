@@ -1,4 +1,4 @@
-package com.franctan.mypassport.ui.common
+package com.franctan.utilities
 
 import java.util.*
 import javax.inject.Inject

@@ -1,1 +1,1 @@
-include ':app', ':buildSrc', ':firebasedatastore', ':test', ':firebaserepo', ':models', ':utilities'
+include ':app', ':buildSrc', ':firebasedatastore', ':test', ':firebaserepo', ':models', ':utilities', ':firebasecloudstorage'

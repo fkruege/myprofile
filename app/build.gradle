@@ -31,7 +31,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':models')
+    implementation project(path: ':utilities')
     implementation project(path: ':firebaserepo')
+    implementation project(path: ':firebasecloudstorage')
 
     implementation Kotlin.stdLib
 
@@ -47,8 +49,6 @@ dependencies {
     implementation GoogleArch.lifeCycleExtensions
 //    kapt GoogleArch.lifeCycleCompiler
 
-//    kapt "com.android.databinding:compiler:$dataBindingCompilerVersion"
-
     implementation Glide.main
     kapt Glide.compiler
 
@@ -60,6 +60,7 @@ dependencies {
 
     implementation Firebase.core
     implementation Firebase.database
+    implementation Firebase.cloudStorage
 
     implementation Rx.rx2Main
     implementation Rx.rx2Android
@@ -67,6 +68,7 @@ dependencies {
     implementation Utils.javaxValidation
     implementation Utils.javaxAnnotation
     implementation Utils.timber
+    implementation Utils.jodaTime
 
     testImplementation Testing.junit
     androidTestImplementation Testing.testRunner

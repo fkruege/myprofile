@@ -1,6 +1,6 @@
 package com.franctan.firebaserepo.daos
 
-import com.franctan.firebaserepo.models.FbProfile
+import com.franctan.firebaserepo.models.FireBaseProfile
 import com.franctan.firebaserepo.models.mapToProfile
 import com.franctan.models.Profile
 import com.google.firebase.database.DataSnapshot
@@ -17,7 +17,7 @@ class ProfilesSnapShotMapper
         var profile: Profile? = null
         try {
             snapshot.key?.let { inKey ->
-                profile = snapshot.getValue(FbProfile::class.java)?.mapToProfile(inKey)
+                profile = snapshot.getValue(FireBaseProfile::class.java)?.mapToProfile(inKey)
             }
         } catch (ex: Exception) {
             Timber.e(ex)

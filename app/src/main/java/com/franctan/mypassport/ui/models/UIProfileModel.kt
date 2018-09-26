@@ -11,6 +11,14 @@ class UIProfileModel : Observable {
 
     private val propertyChangeRegistry = PropertyChangeRegistry()
 
+    var profileId: String = ""
+        @Bindable get
+        set(value) {
+            field = value
+            propertyChangeRegistry.notifyChange(this, BR.profileId)
+        }
+
+
     var firstName: String = "John"
         @Bindable get
         set(value) {
@@ -47,12 +55,17 @@ class UIProfileModel : Observable {
             propertyChangeRegistry.notifyChange(this, BR.hobbyList)
         }
 
+    var profilePhotoPath: String = ""
+        @Bindable get
+        set(value) {
+            field = value
+            propertyChangeRegistry.notifyChange(this, BR.profilePhotoPath)
+        }
 
     var isMale: Boolean = false
         @Bindable get() {
             return gender == Gender.M
         }
-
 
     var isFemale: Boolean = false
         @Bindable get() {

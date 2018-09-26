@@ -25,6 +25,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':utilities')
 
     implementation Kotlin.stdLib
 
@@ -41,6 +42,8 @@ dependencies {
     implementation Utils.jodaTime
     implementation Utils.timber
 
+    implementation Firebase.core
+    implementation Firebase.cloudStorage
 
     testImplementation Testing.junit
     androidTestImplementation Testing.testRunner

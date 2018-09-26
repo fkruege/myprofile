@@ -7,22 +7,24 @@ import org.joda.time.DateTime
 const val HOBBIES_DELIMITER = ';'
 
 
-data class FbProfile(
+data class FireBaseProfile(
         val firstname: String = ""
         , val lastname: String = ""
         , val age: String = ""
         , val datecreated: String = ""
         , val gender: String = ""
         , val hobbies: String = ""
+        , val profilePhotoPath: String = ""
 )
 
-fun FbProfile.mapToProfile(key: String): Profile {
+fun FireBaseProfile.mapToProfile(key: String): Profile {
     val profileId = key
     val firstname = this.firstname
     val lastname = this.lastname
     val age = this.age.toInt()
     val gender = this.gender.toGender()
     val hobbies = this.hobbies.toHobbiesList()
+    val profilePhotoPath = this.profilePhotoPath
     val dateCreated = DateTime(this.datecreated.toLong())
 
     return Profile(
@@ -33,19 +35,21 @@ fun FbProfile.mapToProfile(key: String): Profile {
             , dateCreated
             , gender
             , hobbies
+            , profilePhotoPath
     )
 }
 
-fun Profile.mapToFbProfile(): FbProfile {
+fun Profile.mapToFireBaseProfile(): FireBaseProfile {
     val profileId = this.id
     val firstName = this.firstName
     val lastName = this.lastName
     val age: String = this.age.toString()
     val gender: String = this.gender.toString()
     val hobbies: String = this.hobbyList.joinToString(HOBBIES_DELIMITER.toString())
+    val profilePhotoPath: String = this.profilePhotoPath
     val dateCreated: String = this.dateCreated.millis.toString()
 
-    return FbProfile(firstName, lastName, age, dateCreated, gender, hobbies)
+    return FireBaseProfile(firstName, lastName, age, dateCreated, gender, hobbies, profilePhotoPath)
 }
 
 fun String.toHobbiesList(): List<String> {

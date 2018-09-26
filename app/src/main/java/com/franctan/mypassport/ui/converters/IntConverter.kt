@@ -12,6 +12,10 @@ class IntConverter
     }
 
     fun toInt(value: String): Int {
-        return Integer.parseInt(value)
+        return try {
+            Integer.parseInt(value)
+        } catch (ex: NumberFormatException) {
+            0
+        }
     }
 }

@@ -83,15 +83,6 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setToolbar()
         listenForChoosePhotoEvent()
-
-        editProfileViewModel.imagePathLiveDataListner().observe(this, Observer<String> { t ->
-            val file = File(t)
-            val imageUri = Uri.fromFile(file)
-            Glide.with(this)
-                    .load(imageUri)
-                    .transition(withCrossFade())
-                    .into(imgProfile)
-        })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

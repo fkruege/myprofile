@@ -3,12 +3,11 @@ object Gradle {
 }
 
 
-
 object Kotlin {
-    val version = "1.2.50"
-    val serializationVersion = "0.6.0"
-    val reflectVersion = "1.2.0"
-    val coroutinesVersion = "0.24.0"
+    val version = "1.2.51"
+    val serializationVersion = "0.8.0-rc13"
+    val reflectVersion = "1.2.51"
+    val coroutinesVersion = "0.26.1"
 
     val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
     val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:$reflectVersion"
@@ -23,11 +22,7 @@ object Kotlin {
 object SdkLevel {
     val compileSdk = 28
     val minSdk = 21
-    // Do not use target SDK 27, till google figures out these issues
-    // https://issuetracker.google.com/issues/110172258
-    // https://issuetracker.google.com/issues/68454482
     val targetSdk = 28
-    val buildTools = "28.0.1"
 }
 
 object LpLibs {
@@ -37,7 +32,7 @@ object LpLibs {
 }
 
 object DroidSupport {
-//    val support_version = "28.0.0-alpha1"
+    //    val support_version = "28.0.0-alpha1"
     val support_version = "28.0.0"
 
     val annotations = "com.android.support:support-annotations:$support_version"
@@ -90,11 +85,12 @@ object GooglePlay {
 }
 
 object Firebase {
-    val version1 = "16.0.3"
-    val version2 = "16.0.1"
+    val otherVersion = "16.0.3"
+    val coreVersion = "16.0.1"
 
-    val core = "com.google.firebase:firebase-core:$version1"
-    val database = "com.google.firebase:firebase-database:$version2"
+    val core = "com.google.firebase:firebase-core:$otherVersion"
+    val database = "com.google.firebase:firebase-database:$coreVersion"
+    val cloudStorage = "com.google.firebase:firebase-storage:$coreVersion"
 
 }
 

@@ -1,7 +1,6 @@
 package com.franctan.models
 
 import org.joda.time.DateTime
-import java.util.*
 
 
 data class Profile(
@@ -11,5 +10,6 @@ data class Profile(
         val age: Int,
         val dateCreated: DateTime,
         val gender: Gender,
-        val hobbyList: List<String>
+        val hobbyList: List<String>,
+        val profilePhotoPath: String
 )

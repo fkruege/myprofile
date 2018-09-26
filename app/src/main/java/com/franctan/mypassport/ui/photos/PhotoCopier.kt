@@ -2,13 +2,12 @@ package com.franctan.mypassport.ui.photos
 
 import android.content.Context
 import android.net.Uri
-import com.franctan.mypassport.ui.common.UUIDGenerator
+import com.franctan.utilities.UUIDGenerator
 import io.reactivex.Single
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-import java.util.concurrent.Callable
 import javax.inject.Inject
 
 class PhotoCopier
@@ -19,17 +18,22 @@ class PhotoCopier
 
     fun copyPhoto(uri: Uri): Single<String> {
 
-        return Single.fromCallable(Callable<String> {
+        return Single.fromCallable {
+            var outputFilePath = ""
             val inputStream = context.contentResolver.openInputStream(uri)
-            val fileName = uuid.generate().toString()
-            val outputFile = File(context.cacheDir, fileName)
-            val outputStream = FileOutputStream(outputFile)
-            copyStream(inputStream, outputStream)
+            if (inputStream != null) {
+                val fileName = uuid.generate().toString()
+                val outputFile = File(context.cacheDir, fileName)
+                val outputStream = FileOutputStream(outputFile)
+                copyStream(inputStream, outputStream)
 
-            outputStream.close()
-            inputStream.close()
-            outputFile.absolutePath
-        })
+                outputStream.close()
+                inputStream.close()
+                outputFilePath = outputFile.absolutePath
+            }
+
+            outputFilePath
+        }
 
     }
 

@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class FbProfileKtTest {
+class FireBaseProfileKtTest {
 
     private val profileId = "-KMZ_aCNCCyvTPiVA3wN"
     private val john = "john"
@@ -18,7 +18,7 @@ class FbProfileKtTest {
     private val sing = "sing"
 
     private val fbProfileGood =
-            FbProfile(
+            FireBaseProfile(
                     firstname = john
                     , lastname = doe
                     , age = age3
@@ -28,7 +28,7 @@ class FbProfileKtTest {
             )
 
     val fbProfileUnknownGenderEnum =
-                FbProfile(
+                FireBaseProfile(
                         firstname = john
                         , lastname = doe
                         , age = age3
