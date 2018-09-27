@@ -1,9 +1,8 @@
 package com.franctan.mypassport.ui.main.editprofilefragment
 
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableBoolean
 import android.net.Uri
-import com.franctan.firebasecloudstorage.dagger.FileStorageDao
-import com.franctan.firebaserepo.daos.ProfilesDao
 import com.franctan.models.Profile
 import com.franctan.mypassport.ui.models.UIProfileModel
 import com.franctan.mypassport.ui.models.mapToProfile
@@ -21,19 +20,27 @@ import javax.inject.Inject
 
 class EditProfileViewModel
 @Inject constructor(
-        private val profilesDao: ProfilesDao,
-        private val fileStorageDao: FileStorageDao,
+        private val profileSaver: ProfileSaver,
         private val photoCopier: PhotoCopier,
+        private val validator: ProfileValidator,
         private val uriHelper: UriHelper
 ) : ViewModel() {
 
     val uiProfile = UIProfileModel()
     private val choosePhotoEvent = SingleLiveEvent<Void>()
 
+    private val errMsgEvent = SingleLiveEvent<String>()
+
     private val compositeDisposable = CompositeDisposable()
+
+    val isProgressBarVisible = ObservableBoolean(false)
 
     fun choosePhotoListener(): SingleLiveEvent<Void> {
         return choosePhotoEvent
+    }
+
+    fun errorMsgListener(): SingleLiveEvent<String> {
+        return errMsgEvent
     }
 
 
@@ -43,27 +50,32 @@ class EditProfileViewModel
 
     fun saveProfile() {
         val profileToSave = uiProfile.mapToProfile()
+        val isSaveResult = validator.isSaveValid(profileToSave)
 
-        fileStorageDao.upload(uiProfile.profilePhotoPath)
-                .flatMap { uploadUriResult ->
-                    val copy = profileToSave.copy(profilePhotoPath = uploadUriResult.toString())
-                    profilesDao.saveProfile(copy)
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<Profile> {
-                    override fun onSuccess(profile: Profile) {
-                        Timber.d("Saved profile: $profile")
-                    }
+        if (isSaveResult.isValid) {
+            profileSaver.saveProfile(profileToSave)
+                    .subscribe(object : SingleObserver<Profile> {
+                        override fun onSuccess(profile: Profile) {
+                            Timber.d("Saved profile: $profile")
+                            isProgressBarVisible.set(false)
+                            uiProfile.update(profile)
+                            errMsgEvent.value = "Profile saved."
+                        }
 
-                    override fun onSubscribe(d: Disposable) {
-                        compositeDisposable.add(d)
-                    }
+                        override fun onSubscribe(d: Disposable) {
+                            compositeDisposable.add(d)
+                            isProgressBarVisible.set(true)
+                        }
 
-                    override fun onError(e: Throwable) {
-                        Timber.e(e)
-                    }
-                })
+                        override fun onError(e: Throwable) {
+                            isProgressBarVisible.set(false)
+                            errMsgEvent.value = "There was an error saving the profile.  Please try again."
+                        }
+                    })
+        } else {
+            errMsgEvent.value = isSaveResult.msg
+        }
+
     }
 
     fun copyUserProfilePhoto(uri: Uri) {
@@ -89,4 +101,17 @@ class EditProfileViewModel
         super.onCleared()
         compositeDisposable.clear()
     }
+
+    private fun updateUiProfile(profile: Profile) {
+
+
+//    val profileId = this.id
+//    val firstName = this.firstName
+//    val lastName = this.lastName
+//    val age = this.age
+//    val gender = this.gender
+//    val hobbies = this.hobbyList
+//    val profilePhotoPath = this.profilePhotoPath
+//    val dateCreated = this.dateCreated
+     }
 }

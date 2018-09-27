@@ -29,6 +29,8 @@ dependencies {
     implementation Kotlin.stdLib
 
     implementation Rx.rx2Main
+    implementation Rx.rx2Android
+
 
     implementation Dagger.main
     kapt Dagger.compiler

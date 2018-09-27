@@ -27,6 +27,20 @@
         android:fitsSystemWindows="false">
 
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="75dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:visibleOrGone="@{editProfileViewModel.isProgressBarVisible()}"
+            tools:visibility="gone"
+            />
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/vwToolbar"
             android:layout_width="match_parent"

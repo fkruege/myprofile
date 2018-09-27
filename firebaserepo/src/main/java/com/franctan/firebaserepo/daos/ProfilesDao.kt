@@ -2,6 +2,7 @@ package com.franctan.firebaserepo.daos
 
 import com.franctan.firebaserepo.dagger.ProfilesDatabaseReference
 import com.franctan.firebaserepo.models.mapToFireBaseProfile
+import com.franctan.firebaserepo.models.mapToUpdateMap
 import com.franctan.models.Profile
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -48,23 +49,32 @@ class ProfilesDao
 
     }
 
+
+
     fun saveProfile(profile: Profile): Single<Profile> {
         return Single.fromCallable {
             val fbProfile = profile.mapToFireBaseProfile()
-            var newProfile: Profile? = null
 
-            if (profile.id.isEmpty()) {
-                val key = dbReference.push().key
-                key?.let { inKey ->
-                    dbReference.child(inKey).setValue(fbProfile)
-                    newProfile = profile.copy(id = inKey)
-                }
+            val key = dbReference.push().key
+            if (key != null) {
+                dbReference.child(key).setValue(fbProfile)
+                profile.copy(id = key)
             } else {
-                newProfile = profile.copy()
+                throw IllegalStateException("Could not save record")
             }
 
-            newProfile
+        }
+    }
 
+    fun updateProfile(profile: Profile): Single<Profile> {
+        return Single.create { emitter: SingleEmitter<Profile> ->
+            val key = profile.id
+            val childUpdates = mutableMapOf<String, Any>()
+            childUpdates[key] = profile.mapToUpdateMap()
+
+            dbReference.updateChildren(childUpdates)
+                    .addOnFailureListener { ex -> emitter.onError(ex) }
+                    .addOnSuccessListener { emitter.onSuccess(profile) }
 
         }
 

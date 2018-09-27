@@ -1,29 +1,40 @@
 package com.franctan.mypassport.ui.models
 
 import com.franctan.models.Profile
-import org.joda.time.DateTime
 
 fun UIProfileModel.mapToProfile(): Profile {
 
     val profileId = this.profileId
-    val firstname = this.firstName
-    val lastname = this.lastName
+    val firstname = this.firstName.trim()
+    val lastname = this.lastName.trim()
     val age = this.age
     val gender = this.gender
-    val hobbies = this.hobbyList.toList()
-    val profilePhotoPath = this.profilePhotoPath
-    val dateCreated = DateTime.now()
+    val hobbies = this.hobbyList.filterHobbies()
+    val profilePhotoPath = this.profilePhotoPath.trim()
 
     return Profile(
             profileId
             , firstname
             , lastname
             , age
-            , dateCreated
             , gender
             , hobbies
             , profilePhotoPath
     )
+}
+
+private fun List<String>.filterHobbies(): List<String> {
+
+    val hobbies = mutableListOf<String>()
+    for (hobby in this) {
+        val trimmedHobby = hobby.trim()
+        if (trimmedHobby.isNotEmpty()) {
+            hobbies.add(trimmedHobby)
+        }
+    }
+
+    return hobbies
+
 }
 
 

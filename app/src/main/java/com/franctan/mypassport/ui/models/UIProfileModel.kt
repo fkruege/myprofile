@@ -4,6 +4,7 @@ import android.databinding.Bindable
 import android.databinding.Observable
 import android.databinding.PropertyChangeRegistry
 import com.franctan.models.Gender
+import com.franctan.models.Profile
 import com.franctan.mypassport.BR
 
 
@@ -87,6 +88,16 @@ class UIProfileModel : Observable {
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
         propertyChangeRegistry.add(callback)
+    }
+
+    fun update(profile: Profile){
+       this.profileId = profile.id
+        this.firstName = profile.firstName
+        this.lastName = profile.lastName
+        this.age = profile.age
+        this.gender = profile.gender
+        this.hobbyList = profile.hobbyList.toMutableList()
+        this.profilePhotoPath = profile.profilePhotoPath
     }
 
 }
