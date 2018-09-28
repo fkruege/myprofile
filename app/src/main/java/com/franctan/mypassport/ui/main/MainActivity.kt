@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, EditProfileFragment.newInstance(""))
-//                    .replace(R.id.container, ListProfilesFragment.newInstance())
+//                    .replace(R.id.container, EditProfileFragment.newInstance(""))
+                    .replace(R.id.container, ListProfilesFragment.newInstance())
 //                    .replace(R.id.container, ViewProfileFragment.newInstance(""))
                     .commit()
         }

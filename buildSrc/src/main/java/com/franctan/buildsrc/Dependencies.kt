@@ -214,6 +214,8 @@ object Utils {
     val paperCompiler = "nz.bradcampbell:paperparcel-compiler:$paperParcelVersion"
 
     val nimBus = "com.nimbusds:nimbus-jose-jwt:4.34.2"
+
+    val circularView = "com.mikhaellopez:circularimageview:3.2.0"
 }
 
 object Maps {

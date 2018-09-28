@@ -1,7 +1,7 @@
 package com.franctan.mypassport.ui.permissions
 
-import android.app.Activity
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.franctan.mypassport.R
 import com.franctan.mypassport.ui.common.SnackBarMsgDisplayer
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class SnackbarPermissionsDisplayer
 @Inject constructor(
-        private val activity: Activity,
+        private val activity: AppCompatActivity,
         private val snackBarMsgDisplayer: SnackBarMsgDisplayer
 ) {
 

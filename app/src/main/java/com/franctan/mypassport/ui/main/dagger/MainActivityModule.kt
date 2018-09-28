@@ -1,6 +1,7 @@
 package com.franctan.mypassport.ui.main.dagger
 
 import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import com.franctan.mypassport.ui.main.MainActivity
 import com.franctan.mypassport.ui.main.editprofilefragment.dagger.EditProfileFragmentModule
 import com.franctan.mypassport.ui.main.listprofilesfragment.ListProfilesFragment
@@ -21,7 +22,7 @@ abstract class MainActivityModule {
 @Module
 abstract class MainActivityBindsModule {
     @Binds
-    abstract fun bindMainActivityToActivity(activity: MainActivity): Activity
+    abstract fun bindMainActivityToAppCompatActivity(activity: MainActivity): AppCompatActivity
 }
 
 @Module

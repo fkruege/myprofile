@@ -5,15 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        // https://medium.com/androiddevelopers/android-data-binding-list-tricks-ef3d5630555e
-        <!--<import type="com.example.android.databinding.twowaysample.util.Converter"/>-->
-        <!--<import type="com.example.android.databinding.twowaysample.ui.NumberOfSetsConverters"/>-->
-        <!--<import type="com.franctan.mypassport.ui.converters.IntConverter"/>-->
-
-        <variable
-            name="intConverter"
-            type="com.franctan.mypassport.ui.converters.IntConverter" />
-
         <variable
             name="editProfileViewModel"
             type="com.franctan.mypassport.ui.main.editprofilefragment.EditProfileViewModel" />

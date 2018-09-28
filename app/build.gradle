@@ -69,6 +69,8 @@ dependencies {
     implementation Utils.javaxAnnotation
     implementation Utils.timber
     implementation Utils.jodaTime
+    implementation Utils.circularView
+    implementation "xyz.schwaab:avvylib:0.0.1"
 
     testImplementation Testing.junit
     androidTestImplementation Testing.testRunner

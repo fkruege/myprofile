@@ -1,5 +1,7 @@
 package com.franctan.mypassport.ui.main.listprofilesfragment
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,24 +11,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.franctan.firebaserepo.daos.ProfilesDao
+import com.franctan.lonelyplanetcurrencyguide.injection.view_model.ViewModelFactory
 import com.franctan.models.Profile
 import com.franctan.mypassport.R
+import com.franctan.mypassport.databinding.FragmentListProfilesBinding
 import com.franctan.mypassport.ui.main.listprofilesfragment.list.ProfilesAdapter
 import dagger.android.support.AndroidSupportInjection
-import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_list_profiles.*
-import timber.log.Timber
 import javax.inject.Inject
 
 class ListProfilesFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    @Inject
     lateinit var profilesDao: ProfilesDao
 
-    private lateinit var profilesAdapter : ProfilesAdapter
+    private lateinit var listProfilesBinding: FragmentListProfilesBinding
+    private lateinit var profilesAdapter: ProfilesAdapter
+    private lateinit var listProfilesViewModel: ListProfilesViewModel
 
     companion object {
         fun newInstance(): ListProfilesFragment {
@@ -37,6 +41,7 @@ class ListProfilesFragment : Fragment() {
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+        loadViewModel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,36 +51,38 @@ class ListProfilesFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_list_profiles, container, false)
+        listProfilesBinding = FragmentListProfilesBinding.inflate(inflater, container, false)
+        listProfilesBinding.listProfileViewModel = listProfilesViewModel
+        return listProfilesBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar = toolbar
-        toolbar.title = "Passport Profiles"
-        val parentActivity : AppCompatActivity = this.activity as AppCompatActivity
-        parentActivity.setSupportActionBar(toolbar)
-
+        setupToolbar()
         setupBottomBarMenu()
         setupRecyclerView()
 
-        profilesDao.getProfiles()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<List<Profile>> {
-                    override fun onSuccess(t: List<Profile>) {
-                        profilesAdapter.update(t)
-                    }
+        listenForProfileUpdates()
 
-                    override fun onSubscribe(d: Disposable) {
-                    }
+    }
 
-                    override fun onError(e: Throwable) {
-                        Timber.e(e)
-                    }
+
+    private fun listenForProfileUpdates() {
+        listProfilesViewModel
+                .ProfilesLiveData
+                .observe(this, Observer<List<Profile>> { list ->
+                    list?.let { inList -> profilesAdapter.update(inList) }
                 })
     }
+
+    private fun setupToolbar() {
+        val toolbar = toolbar
+        //        toolbar.title = "Passport Profiles"
+        val parentActivity: AppCompatActivity = this.activity as AppCompatActivity
+        parentActivity.setSupportActionBar(toolbar)
+    }
+
 
     private fun setupBottomBarMenu() {
         bottom_appbar.replaceMenu(R.menu.menu)
@@ -86,5 +93,9 @@ class ListProfilesFragment : Fragment() {
 
         rvProfiles.layoutManager = layoutManager
         rvProfiles.adapter = profilesAdapter
+    }
+
+    private fun loadViewModel() {
+        listProfilesViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListProfilesViewModel::class.java)
     }
 }

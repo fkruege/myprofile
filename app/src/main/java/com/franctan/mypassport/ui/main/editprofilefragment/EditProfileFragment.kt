@@ -75,7 +75,6 @@ class EditProfileFragment : Fragment() {
 
         editProfileBinding = FragmentEditProfileBinding.inflate(inflater, container, false)
         editProfileBinding.editProfileViewModel = editProfileViewModel
-        editProfileBinding.intConverter = intConverter
         return editProfileBinding.root
 
     }

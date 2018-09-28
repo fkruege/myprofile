@@ -2,6 +2,9 @@
     <string name="app_name">MyPassport</string>
     <string name="sampleHobbies">Golf\nBasketball\nBaseball\nFishing\nRunning\n\nChess\nCheckers\n\Badminton\nCricket\nSquash\nWeights\nSitting\n</string>
 
+
+    <string name="passport_profiles">Passport Profiles</string>
+
     <string name="select_photo">Select Photo</string>
 
     <string name="external_storage_access_required">External storage access permission is needed for profile photos.</string>

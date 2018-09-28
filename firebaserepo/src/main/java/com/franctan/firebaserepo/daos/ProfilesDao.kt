@@ -8,20 +8,37 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import io.reactivex.Completable
-import io.reactivex.Single
-import io.reactivex.SingleEmitter
+import io.reactivex.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
 class ProfilesDao
 @Inject constructor(
-        @ProfilesDatabaseReference private val dbReference: DatabaseReference
-        , private val profilesMapper: ProfilesSnapShotMapper
+        @ProfilesDatabaseReference private val dbReference: DatabaseReference,
+        private val profilesMapper: ProfilesSnapShotMapper,
+        private val listenerCreator: ListProfilesListenerCreator
 ) {
 
-    fun getProfiles(): Single<List<Profile>> {
 
+    fun getProfileListObserver(): Observable<List<Profile>> {
+        var listener: ValueEventListener? = null
+
+        return Observable
+                .create { emitter: ObservableEmitter<List<Profile>> ->
+                    listener = listenerCreator.createValueListener(emitter, profilesMapper)
+                    listener?.let { inListener -> dbReference.addValueEventListener(inListener) }
+                }
+                .doOnDispose {
+                    listener?.let { inListener ->
+                        Timber.d("Remove Reference")
+                        dbReference.removeEventListener(inListener)
+                    }
+                }
+    }
+
+
+    fun getProfiles(): Single<List<Profile>> {
         return Single.create { emitter: SingleEmitter<List<Profile>> ->
             dbReference
                     .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -47,7 +64,6 @@ class ProfilesDao
                         }
                     })
         }
-
     }
 
 

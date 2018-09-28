@@ -87,6 +87,7 @@ class EditProfileViewModel
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
+        Timber.d("OnCleared")
     }
 
 
