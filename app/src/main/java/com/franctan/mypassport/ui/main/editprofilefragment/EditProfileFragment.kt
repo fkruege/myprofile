@@ -7,10 +7,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.franctan.lonelyplanetcurrencyguide.injection.view_model.ViewModelFactory
+import com.franctan.models.Profile
+import com.franctan.mypassport.R
 import com.franctan.mypassport.databinding.FragmentEditProfileBinding
 import com.franctan.mypassport.ui.common.SnackBarMsgDisplayer
 import com.franctan.mypassport.ui.converters.IntConverter
@@ -71,6 +71,7 @@ class EditProfileFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
 
         editProfileBinding = FragmentEditProfileBinding.inflate(inflater, container, false)
         editProfileBinding.editProfileViewModel = editProfileViewModel
@@ -83,7 +84,28 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setToolbar()
         listenForChoosePhotoEvent()
-        listenForErrorMsgEvent()
+        listenForMsgEvent()
+        listForChangeInProfileIdEvent()
+    }
+
+    var btnDelete: MenuItem? = null
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.editprofile_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+        btnDelete = menu?.findItem(R.id.btnDelete)
+
+        setBtnDeleteVisibility()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+
+        if (item.itemId == R.id.btnDelete) {
+            editProfileViewModel.deleteProfile()
+        }
+
+        return true
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -105,13 +127,26 @@ class EditProfileFragment : Fragment() {
 
     private fun setToolbar() {
         val toolbar = vwToolbar
+//        toolbar.inflateMenu(R.menu.editprofile_menu)
         val parentActivity: AppCompatActivity = this.activity as AppCompatActivity
         parentActivity.setSupportActionBar(toolbar)
+        parentActivity.supportActionBar?.setHomeButtonEnabled(true)
+        parentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+//        parentActivity.menuInflater.inflate(R.menu.editprofile_menu)
+    }
+
+    private fun listForChangeInProfileIdEvent() {
+        editProfileViewModel.profileLiveData.observe(this, object : Observer<Profile> {
+            override fun onChanged(profile: Profile?) {
+                setBtnDeleteVisibility()
+            }
+        })
     }
 
 
     private fun listenForChoosePhotoEvent() {
-        editProfileViewModel.choosePhotoListener().observe(this, Observer<Void> {
+        editProfileViewModel.choosePhotoEvent.observe(this, Observer<Void> {
             if (permissionHelper.isGrantedReadStoragePermission()) {
                 launchChoosePhotoIntent()
             } else {
@@ -121,8 +156,8 @@ class EditProfileFragment : Fragment() {
     }
 
 
-    private fun listenForErrorMsgEvent() {
-        editProfileViewModel.errorMsgListener().observe(this, Observer<String> { msg ->
+    private fun listenForMsgEvent() {
+        editProfileViewModel.msgEvent.observe(this, Observer { msg ->
             msg?.let { snackBarMsgDisplayer.displayMsg(it) }
         })
     }
@@ -130,4 +165,11 @@ class EditProfileFragment : Fragment() {
     private fun launchChoosePhotoIntent() {
         photoChooser.launchChoosePhotoIntent()
     }
+
+    private fun setBtnDeleteVisibility() {
+        btnDelete?.isVisible = editProfileViewModel.isDeleteBtnVisible
+
+    }
 }
+
+

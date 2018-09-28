@@ -1,5 +1,7 @@
 package com.franctan.models
 
+import java.util.Collections.emptyList
+
 
 data class Profile(
         val id: String,
@@ -9,4 +11,12 @@ data class Profile(
         val gender: Gender,
         val hobbyList: List<String>,
         val profilePhotoPath: String
-)
+) {
+    companion object {
+        fun EMPTY(): Profile {
+            return Profile("", "", "", 0, Gender.M, emptyList(), "")
+        }
+    }
+
+}
+

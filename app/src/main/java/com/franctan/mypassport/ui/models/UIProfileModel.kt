@@ -19,37 +19,35 @@ class UIProfileModel : Observable {
             propertyChangeRegistry.notifyChange(this, BR.profileId)
         }
 
-
-    var firstName: String = "John"
+    var firstName: String = ""
         @Bindable get
         set(value) {
             field = value
             propertyChangeRegistry.notifyChange(this, BR.firstName)
         }
 
-    var lastName: String = "Doe"
+    var lastName: String = ""
         @Bindable get
         set(value) {
             field = value
             propertyChangeRegistry.notifyChange(this, BR.lastName)
         }
 
-    var age: Int = 100
+    var age: String = ""
         @Bindable get
         set(value) {
             field = value
             propertyChangeRegistry.notifyChange(this, BR.age)
         }
 
-
-    var gender: Gender = Gender.F
+    var gender: Gender = Gender.M
         @Bindable get
         set(value) {
             field = value
             propertyChangeRegistry.notifyChange(this, BR.gender)
         }
 
-    var hobbyList: MutableList<String> = mutableListOf("boxing", "dance", "hockey")
+    var hobbyList: MutableList<String> = mutableListOf()
         @Bindable get
         set(value) {
             field = value
@@ -81,7 +79,6 @@ class UIProfileModel : Observable {
         gender = Gender.F
     }
 
-
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
         propertyChangeRegistry.remove(callback)
     }
@@ -94,7 +91,7 @@ class UIProfileModel : Observable {
        this.profileId = profile.id
         this.firstName = profile.firstName
         this.lastName = profile.lastName
-        this.age = profile.age
+        this.age = profile.age.toString()
         this.gender = profile.gender
         this.hobbyList = profile.hobbyList.toMutableList()
         this.profilePhotoPath = profile.profilePhotoPath

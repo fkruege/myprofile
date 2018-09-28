@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
 import javax.inject.Inject
@@ -50,7 +51,6 @@ class ProfilesDao
     }
 
 
-
     fun saveProfile(profile: Profile): Single<Profile> {
         return Single.fromCallable {
             val fbProfile = profile.mapToFireBaseProfile()
@@ -76,6 +76,14 @@ class ProfilesDao
                     .addOnFailureListener { ex -> emitter.onError(ex) }
                     .addOnSuccessListener { emitter.onSuccess(profile) }
 
+        }
+    }
+
+    fun deleteProfile(profile: Profile): Completable {
+        return Completable.create { emitter ->
+            dbReference.child(profile.id).removeValue()
+                    .addOnFailureListener { ex -> emitter.onError(ex) }
+                    .addOnSuccessListener { emitter.onComplete() }
         }
 
     }
