@@ -2,12 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/btnFiller"
+        android:checked="true"
+        android:title=""
+        app:showAsAction="collapseActionView" />
+
     <item
         android:id="@+id/btnDelete"
-        android:checked="true"
         android:icon="@drawable/ic_delete_forever"
         android:title="Delete"
-        app:showAsAction="always" />
-    <!--android:icon="@android:drawable/ic_delete"-->
+        app:showAsAction="collapseActionView" />
 
 </menu>

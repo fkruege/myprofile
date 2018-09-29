@@ -37,7 +37,6 @@
             app:avvy_border_thickness="1dp"
             app:avvy_border_thickness_highlight="2dp"
             app:avvy_distance_to_border="2dp"
-            android:hapticFeedbackEnabled="true"
             app:avvy_highlighted="true"
             tools:src="@drawable/einstein" />
 

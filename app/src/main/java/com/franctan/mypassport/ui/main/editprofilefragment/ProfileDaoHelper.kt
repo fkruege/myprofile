@@ -1,13 +1,13 @@
 package com.franctan.mypassport.ui.main.editprofilefragment
 
-import com.franctan.firebaserepo.daos.ProfilesDao
+import com.franctan.firebaserepo.daos.ProfileEditsDao
 import com.franctan.models.Profile
 import io.reactivex.Single
 import javax.inject.Inject
 
 class ProfileDaoHelper
 @Inject constructor(
-        private val profilesDao: ProfilesDao
+        private val profilesDao: ProfileEditsDao
 
 ) {
 

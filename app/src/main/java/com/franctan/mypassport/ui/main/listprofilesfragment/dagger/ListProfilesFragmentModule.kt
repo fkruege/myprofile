@@ -1,7 +1,6 @@
 package com.franctan.mypassport.ui.main.listprofilesfragment.dagger
 
 import android.support.v4.app.Fragment
-import com.franctan.mypassport.ui.main.editprofilefragment.EditProfileFragment
 import com.franctan.mypassport.ui.main.listprofilesfragment.ListProfilesFragment
 import dagger.Binds
 import dagger.Module

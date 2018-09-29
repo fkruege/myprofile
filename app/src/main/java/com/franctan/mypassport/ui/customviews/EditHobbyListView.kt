@@ -9,14 +9,14 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.franctan.mypassport.R
-import kotlinx.android.synthetic.main.view_hobbies_edit.view.*
+import kotlinx.android.synthetic.main.customview_hobbies_edit.view.*
 
 class EditHobbyListView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private lateinit var hobbiesList: MutableList<String>
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.view_hobbies_edit, this, true)
+        LayoutInflater.from(context).inflate(R.layout.customview_hobbies_edit, this, true)
 
         txtAddMoreHobbies.setOnClickListener { addMoreClicked() }
 

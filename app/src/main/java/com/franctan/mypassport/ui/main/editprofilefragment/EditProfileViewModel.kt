@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.net.Uri
+import com.franctan.firebaserepo.daos.IndividualProfileDao
 import com.franctan.models.Profile
 import com.franctan.mypassport.ui.models.UIProfileModel
 import com.franctan.mypassport.ui.models.mapToProfile
@@ -23,6 +24,7 @@ import javax.inject.Inject
 
 class EditProfileViewModel
 @Inject constructor(
+        private val individualProfileDao: IndividualProfileDao,
         private val profileEditor: ProfileEditor,
         private val photoCopier: PhotoCopier,
         private val validator: ProfileValidator,
@@ -33,6 +35,8 @@ class EditProfileViewModel
     val uiProfile = UIProfileModel()
 
     internal val choosePhotoEvent = SingleLiveEvent<Void>()
+    internal val saveDoneEvent = SingleLiveEvent<Void>()
+    internal val deleteDoneEvent = SingleLiveEvent<Void>()
     internal val msgEvent = SingleLiveEvent<String>()
 
     val profileLiveData = MutableLiveData<Profile>()
@@ -50,13 +54,35 @@ class EditProfileViewModel
 
     init {
         val emptyProfile = Profile.EMPTY()
-        profileLiveData.value = emptyProfile
         updateModels(emptyProfile)
     }
 
     fun choosePhoto() {
         choosePhotoEvent.call()
     }
+
+
+    fun loadUser(profileId: String) {
+        individualProfileDao.getProfileSingle(profileId)
+                .subscribeOn(ioScheduler)
+                .observeOn(mainScheduler)
+                .subscribe(object : SingleObserver<Profile> {
+                    override fun onSuccess(profile: Profile) {
+                        updateModels(profile)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                        compositeDisposable.add(d)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Timber.e(e)
+                        msgEvent.value = "Cannnot edit profile."
+                    }
+                })
+
+    }
+
 
     fun saveProfile() {
         val profileToSave = uiProfile.mapToProfile()
@@ -98,6 +124,7 @@ class EditProfileViewModel
                 isProgressBarVisible.set(false)
                 updateModels(profile)
                 msgEvent.value = "Profile saved."
+                saveDoneEvent.call()
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -117,6 +144,7 @@ class EditProfileViewModel
         return object : CompletableObserver {
             override fun onComplete() {
                 msgEvent.value = "Profile deleted"
+                deleteDoneEvent.call()
             }
 
             override fun onSubscribe(d: Disposable) {

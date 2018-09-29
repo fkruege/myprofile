@@ -12,7 +12,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations.initMocks
 
-class ProfilesDaoTest {
+class IndividualProfileDaoTest {
 
     @Mock
     private lateinit var dbReference: DatabaseReference
@@ -30,9 +30,9 @@ class ProfilesDaoTest {
     private lateinit var childSnapShot: DataSnapshot
 
     @InjectMocks
-    private lateinit var dao: ProfilesDao
+    private lateinit var dao: IndividualProfileDao
 
-    private val profile1 = Profile("-KMZ_aCNCCyvTPiVA3wK", "", "", 1, DateTime(1), Gender.M, emptyList())
+    private val profile1 = Profile("-KMZ_aCNCCyvTPiVA3wK", "", "", 1, DateTime(1), Gender.Male, emptyList())
 
     @Before
     fun setUp() {
@@ -44,7 +44,7 @@ class ProfilesDaoTest {
     fun getProfilesHappy() {
         `when`(parentSnapShot.children).thenReturn(listOf(childSnapShot))
 
-        `when`(profilesMapper.tryToMapToProfile(any())).thenReturn(profile1)
+        `when`(profilesMapper.tryToParseProfileFromValue(any())).thenReturn(profile1)
 
         `when`(dbReference.addListenerForSingleValueEvent(any())).thenAnswer { invocation ->
             val callback: ValueEventListener = invocation!!.getArgument<ValueEventListener>(0)
@@ -58,7 +58,7 @@ class ProfilesDaoTest {
     fun getProfilesExceptionThrown() {
         `when`(parentSnapShot.children).thenReturn(listOf(childSnapShot))
 
-        `when`(profilesMapper.tryToMapToProfile(any())).thenThrow(NullPointerException(""))
+        `when`(profilesMapper.tryToParseProfileFromValue(any())).thenThrow(NullPointerException(""))
 
         `when`(dbReference.addListenerForSingleValueEvent(any())).thenAnswer { invocation ->
             val callback: ValueEventListener = invocation!!.getArgument<ValueEventListener>(0)

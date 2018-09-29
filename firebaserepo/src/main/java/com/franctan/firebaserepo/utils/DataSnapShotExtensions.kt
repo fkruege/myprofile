@@ -16,6 +16,6 @@ fun DataSnapshot.parseString(key: String, default: String = ""): String {
     return this.child(key).value?.toString() ?: default
 }
 
-fun DataSnapshot.parseGender(key: String, default: Gender = Gender.M): Gender {
+fun DataSnapshot.parseGender(key: String, default: Gender = Gender.Male): Gender {
     return this.child(key).value?.toString()?.let { value -> Gender.valueOf("") } ?: default
 }

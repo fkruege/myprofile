@@ -23,7 +23,7 @@ class FireBaseProfileKtTest {
                     , lastname = doe
                     , age = age3
                     , datecreated = date1
-                    , gender = "M"
+                    , gender = "Male"
                     , hobbies = "$dance;$sing"
             )
 
@@ -52,7 +52,7 @@ class FireBaseProfileKtTest {
         assertEquals(doe, mappedProfile.lastName)
         assertEquals(age3.toInt(), mappedProfile.age)
         assertEquals(DateTime(date1.toLong()), mappedProfile.dateCreated)
-        assertEquals(Gender.M, mappedProfile.gender)
+        assertEquals(Gender.Male, mappedProfile.gender)
         assertTrue(mappedProfile.hobbyList.isNotEmpty())
 
     }

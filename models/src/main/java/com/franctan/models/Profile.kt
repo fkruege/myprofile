@@ -14,7 +14,7 @@ data class Profile(
 ) {
     companion object {
         fun EMPTY(): Profile {
-            return Profile("", "", "", 0, Gender.M, emptyList(), "")
+            return Profile("", "", "", 0, Gender.Male, emptyList(), "")
         }
     }
 

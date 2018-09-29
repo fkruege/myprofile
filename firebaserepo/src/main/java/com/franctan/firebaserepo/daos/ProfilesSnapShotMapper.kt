@@ -1,6 +1,7 @@
 package com.franctan.firebaserepo.daos
 
 import com.franctan.firebaserepo.models.FireBaseProfile
+import com.franctan.firebaserepo.models.mapToFirebaseProfile
 import com.franctan.firebaserepo.models.mapToProfile
 import com.franctan.models.Profile
 import com.google.firebase.database.DataSnapshot
@@ -10,10 +11,9 @@ import javax.inject.Inject
 
 
 class ProfilesSnapShotMapper
-@Inject constructor()
-{
+@Inject constructor() {
 
-    internal fun tryToMapToProfile(snapshot: DataSnapshot): Profile? {
+    internal fun tryToParseProfileFromValue(snapshot: DataSnapshot): Profile? {
         var profile: Profile? = null
         try {
             snapshot.key?.let { inKey ->
@@ -26,6 +26,20 @@ class ProfilesSnapShotMapper
             }
         }
 
+        return profile
+    }
+
+    internal fun tryToParseProfileFromMap(snapshot: DataSnapshot): Profile {
+        val keyValueMap = mutableMapOf<String, String>()
+        for (item in snapshot.children) {
+            Timber.d(item.toString())
+            item.key?.let { inKey ->
+                keyValueMap[inKey] = item.value.toString()
+            }
+        }
+
+        val fireBaseProfile = keyValueMap.mapToFirebaseProfile()
+        val profile = fireBaseProfile.mapToProfile(snapshot.key!!)
         return profile
     }
 

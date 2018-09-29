@@ -6,6 +6,7 @@ import com.franctan.lonelyplanetcurrencyguide.injection.view_model.ViewModelFact
 
 import com.franctan.mypassport.ui.main.editprofilefragment.EditProfileViewModel
 import com.franctan.mypassport.ui.main.listprofilesfragment.ListProfilesViewModel
+import com.franctan.mypassport.ui.main.viewprofilefragment.ViewProfileViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -23,6 +24,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ListProfilesViewModel::class)
     abstract fun bindListProfilesViewModell(model: ListProfilesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ViewProfileViewModel::class)
+    abstract fun bindViewProfileViewModell(model: ViewProfileViewModel): ViewModel
+
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

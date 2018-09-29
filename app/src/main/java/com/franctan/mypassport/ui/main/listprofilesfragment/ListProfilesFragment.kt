@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.franctan.firebaserepo.daos.ProfilesDao
 import com.franctan.lonelyplanetcurrencyguide.injection.view_model.ViewModelFactory
 import com.franctan.models.Profile
 import com.franctan.mypassport.R
@@ -65,6 +64,7 @@ class ListProfilesFragment : Fragment(), ProfileClickListener {
         setupRecyclerView()
 
         listenForProfileUpdates()
+        listenForAddNewProfileEvent()
 
     }
 
@@ -103,4 +103,11 @@ class ListProfilesFragment : Fragment(), ProfileClickListener {
     private fun loadViewModel() {
         listProfilesViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListProfilesViewModel::class.java)
     }
+
+    private fun listenForAddNewProfileEvent() {
+        listProfilesViewModel.addNewProfileEvent.observe(this, Observer {
+            navigator.goToEditProfile("")
+        })
+    }
+
 }

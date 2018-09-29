@@ -12,8 +12,9 @@ import com.franctan.lonelyplanetcurrencyguide.injection.view_model.ViewModelFact
 import com.franctan.models.Profile
 import com.franctan.mypassport.R
 import com.franctan.mypassport.databinding.FragmentEditProfileBinding
+import com.franctan.mypassport.ui.common.Constants.Companion.PROFILE_ID_KEY
 import com.franctan.mypassport.ui.common.SnackBarMsgDisplayer
-import com.franctan.mypassport.ui.converters.IntConverter
+import com.franctan.mypassport.ui.navigation.Navigator
 import com.franctan.mypassport.ui.permissions.PermissionHelper
 import com.franctan.mypassport.ui.photos.PhotoChooser
 import dagger.android.support.AndroidSupportInjection
@@ -28,9 +29,6 @@ class EditProfileFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     @Inject
-    lateinit var intConverter: IntConverter
-
-    @Inject
     lateinit var permissionHelper: PermissionHelper
 
     @Inject
@@ -39,19 +37,19 @@ class EditProfileFragment : Fragment() {
     @Inject
     lateinit var snackBarMsgDisplayer: SnackBarMsgDisplayer
 
+    @Inject
+    lateinit var navigator: Navigator
+
     private lateinit var editProfileViewModel: EditProfileViewModel
 
     lateinit var editProfileBinding: FragmentEditProfileBinding
 
     companion object {
-        const val PROFILE_ID_KEY = "profileid"
         fun newInstance(profileId: String): EditProfileFragment {
             val arguments = Bundle()
             arguments.putString(PROFILE_ID_KEY, profileId)
-
             val fragment = EditProfileFragment()
             fragment.arguments = arguments
-
             return fragment
         }
     }
@@ -64,9 +62,13 @@ class EditProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        savedInstanceState?.let {
-            //            val profileId: String? = savedInstanceState.getString(PROFILE_ID_KEY)
-//            profileId?.let { editViewModel.setProfileId(it) }
+        arguments?.let { inArgs ->
+            inArgs[PROFILE_ID_KEY]?.let { inProfileId ->
+                val profileId = inProfileId as String
+                if (profileId.isNotEmpty()) {
+                    editProfileViewModel.loadUser(profileId)
+                }
+            }
         }
     }
 
@@ -85,6 +87,8 @@ class EditProfileFragment : Fragment() {
         listenForChoosePhotoEvent()
         listenForMsgEvent()
         listForChangeInProfileIdEvent()
+        listenForSaveDoneEvent()
+        listenForDeleteDoneEvent()
     }
 
     var btnDelete: MenuItem? = null
@@ -126,26 +130,23 @@ class EditProfileFragment : Fragment() {
 
     private fun setToolbar() {
         val toolbar = vwToolbar
-//        toolbar.inflateMenu(R.menu.editprofile_menu)
         val parentActivity: AppCompatActivity = this.activity as AppCompatActivity
         parentActivity.setSupportActionBar(toolbar)
         parentActivity.supportActionBar?.setHomeButtonEnabled(true)
         parentActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-//        parentActivity.menuInflater.inflate(R.menu.editprofile_menu)
+        toolbar.setNavigationOnClickListener {
+            navigator.goBack()
+        }
     }
 
     private fun listForChangeInProfileIdEvent() {
-        editProfileViewModel.profileLiveData.observe(this, object : Observer<Profile> {
-            override fun onChanged(profile: Profile?) {
-                setBtnDeleteVisibility()
-            }
-        })
+        editProfileViewModel.profileLiveData.observe(this, Observer<Profile> { setBtnDeleteVisibility() })
     }
 
 
     private fun listenForChoosePhotoEvent() {
-        editProfileViewModel.choosePhotoEvent.observe(this, Observer<Void> {
+        editProfileViewModel.choosePhotoEvent.observe(this, Observer {
             if (permissionHelper.isGrantedReadStoragePermission()) {
                 launchChoosePhotoIntent()
             } else {
@@ -158,6 +159,18 @@ class EditProfileFragment : Fragment() {
     private fun listenForMsgEvent() {
         editProfileViewModel.msgEvent.observe(this, Observer { msg ->
             msg?.let { snackBarMsgDisplayer.displayMsg(it) }
+        })
+    }
+
+    private fun listenForSaveDoneEvent() {
+        editProfileViewModel.saveDoneEvent.observe(this, Observer {
+            navigator.goBack()
+        })
+    }
+
+    private fun listenForDeleteDoneEvent() {
+        editProfileViewModel.deleteDoneEvent.observe(this, Observer {
+            navigator.goBackToListProfiles()
         })
     }
 

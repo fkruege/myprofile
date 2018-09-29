@@ -9,10 +9,12 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ListProfilesListenerCreator
-@Inject constructor() {
+@Inject constructor(
+        private val profilesMapper: ProfilesSnapShotMapper
+) {
 
 
-    internal fun createValueListener(emitter: ObservableEmitter<List<Profile>>, profilesMapper: ProfilesSnapShotMapper): ValueEventListener {
+    internal fun createValueListener(emitter: ObservableEmitter<List<Profile>> ): ValueEventListener {
         return object : ValueEventListener {
             override fun onCancelled(dbError: DatabaseError) {
             }
@@ -23,7 +25,7 @@ class ListProfilesListenerCreator
                 Timber.d("new snapshot")
                 for (item in snapshot.children) {
                     try {
-                        val profile = profilesMapper.tryToMapToProfile(item)
+                        val profile = profilesMapper.tryToParseProfileFromValue(item)
                         if (profile != null) {
                             profileList.add(profile)
                         }

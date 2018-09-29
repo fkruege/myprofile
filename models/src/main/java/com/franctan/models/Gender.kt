@@ -2,7 +2,7 @@ package com.franctan.models
 
 
 enum class Gender {
-    M, F
+    Male, Female
 }
 
 public fun String.toGender(): Gender {

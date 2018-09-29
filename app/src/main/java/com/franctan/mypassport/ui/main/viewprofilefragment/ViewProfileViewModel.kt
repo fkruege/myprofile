@@ -1,10 +1,9 @@
-package com.franctan.mypassport.ui.main.listprofilesfragment
+package com.franctan.mypassport.ui.main.viewprofilefragment
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.franctan.firebaserepo.daos.ProfilesListDao
+import com.franctan.firebaserepo.daos.IndividualProfileDao
 import com.franctan.models.Profile
+import com.franctan.mypassport.ui.models.UIProfileModel
 import com.franctan.mypassport.ui.viewmodelsupport.SingleLiveEvent
 import com.franctan.utilities.IoScheduler
 import com.franctan.utilities.MainScheduler
@@ -15,60 +14,60 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
-class ListProfilesViewModel
+class ViewProfileViewModel
 @Inject constructor(
-        private val profilesDao: ProfilesListDao,
+        private val individualProfileDao: IndividualProfileDao,
         @IoScheduler private val ioScheduler: Scheduler,
         @MainScheduler private val mainScheduler: Scheduler
 ) : ViewModel() {
 
-    private val profilesLiveData = MutableLiveData<List<Profile>>()
+    val uiProfile = UIProfileModel()
+
+
+    internal val editProfileEvent = SingleLiveEvent<String>()
+
     private val compositeDisposable = CompositeDisposable()
 
-    internal val addNewProfileEvent = SingleLiveEvent<Void>()
-
-    internal val openProfileEvent = SingleLiveEvent<String>()
-
-    val ProfilesLiveData: LiveData<List<Profile>>
-        get() = profilesLiveData
-
     init {
-        loadProfiles()
+        val emptyProfile = Profile.EMPTY()
+        updateModels(emptyProfile)
     }
 
-    fun addNewProfileClick(){
-       addNewProfileEvent.call()
-    }
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
     }
 
-    private fun loadProfiles() {
-        profilesDao.getProfileListObserver()
+    fun loadUser(profileId: String) {
+        individualProfileDao.getOneProfileObserver(profileId)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainScheduler)
-                .subscribe(object : Observer<List<Profile>> {
+                .subscribe(object : Observer<Profile> {
                     override fun onComplete() {
-                        Timber.d("onComplete")
                     }
 
                     override fun onSubscribe(d: Disposable) {
                         compositeDisposable.add(d)
                     }
 
-                    override fun onNext(list: List<Profile>) {
-                        profilesLiveData.value = list
+                    override fun onNext(profile: Profile) {
+                        updateModels(profile)
                     }
 
                     override fun onError(e: Throwable) {
                         Timber.e(e)
                     }
                 })
-
     }
 
+    fun editProfileClick() {
+        editProfileEvent.value = uiProfile.profileId
+    }
+
+    private fun updateModels(profile: Profile) {
+        uiProfile.update(profile)
+    }
 
 }
 

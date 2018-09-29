@@ -4,6 +4,12 @@ import com.franctan.models.Profile
 import com.franctan.models.toGender
 
 const val HOBBIES_DELIMITER = ';'
+const val FIRST_NAME = "firstname"
+const val LAST_NAME = "lastname"
+const val AGE = "age"
+const val GENDER = "gender"
+const val HOBBIES = "hobbies"
+const val PROFILE_PHOTO_PATH = "profilePhotoPath"
 
 
 data class FireBaseProfile(
@@ -14,6 +20,7 @@ data class FireBaseProfile(
         , val hobbies: String = ""
         , val profilePhotoPath: String = ""
 )
+
 
 fun FireBaseProfile.mapToProfile(key: String): Profile {
     val profileId = key
@@ -37,13 +44,24 @@ fun FireBaseProfile.mapToProfile(key: String): Profile {
 
 fun Profile.mapToUpdateMap(): Map<String, Any> {
     val updateMap = mutableMapOf<String, Any>()
-    updateMap["firstname"] = this.firstName
-    updateMap["lastname"] = this.lastName
-    updateMap["age"] = this.age.toString()
-    updateMap["gender"] = this.gender.toString()
-    updateMap["hobbies"] = this.hobbyList.joinToString(HOBBIES_DELIMITER.toString())
-    updateMap["profilePhotoPath"] = this.profilePhotoPath
+    updateMap[FIRST_NAME] = this.firstName
+    updateMap[LAST_NAME] = this.lastName
+    updateMap[AGE] = this.age.toString()
+    updateMap[GENDER] = this.gender.toString()
+    updateMap[HOBBIES] = this.hobbyList.joinToString(HOBBIES_DELIMITER.toString())
+    updateMap[PROFILE_PHOTO_PATH] = this.profilePhotoPath
     return updateMap
+}
+
+fun Map<String, String>.mapToFirebaseProfile(): FireBaseProfile {
+    val firstName = this[FIRST_NAME] ?: ""
+    val lastName = this[LAST_NAME] ?: ""
+    val age: String = this[AGE] ?: ""
+    val gender: String = this[GENDER] ?: ""
+    val hobbies: String = this[HOBBIES] ?: ""
+    val profilePhotoPath: String = this[PROFILE_PHOTO_PATH] ?: ""
+
+    return FireBaseProfile(firstName, lastName, age, gender, hobbies, profilePhotoPath)
 }
 
 fun Profile.mapToFireBaseProfile(): FireBaseProfile {
@@ -55,7 +73,7 @@ fun Profile.mapToFireBaseProfile(): FireBaseProfile {
     val hobbies: String = this.hobbyList.joinToString(HOBBIES_DELIMITER.toString())
     val profilePhotoPath: String = this.profilePhotoPath
 
-    return FireBaseProfile(firstName, lastName, age,  gender, hobbies, profilePhotoPath)
+    return FireBaseProfile(firstName, lastName, age, gender, hobbies, profilePhotoPath)
 }
 
 private fun String.toHobbiesList(): List<String> {
