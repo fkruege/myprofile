@@ -5,66 +5,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="91dp"
     app:cardElevation="0dp"
     card_view:cardCornerRadius="0dp"
     tools:ignore="MissingPrefix">
 
 
     <LinearLayout
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!--<com.mikhaellopez.circularimageview.CircularImageView-->
-        <!--android:id="@+id/imgProfile"-->
-        <!--android:layout_width="125dp"-->
-        <!--android:layout_height="125dp"-->
-        <!--app:civ_border_color="#EEEEEE"-->
-        <!--app:civ_border_width="4dp"-->
-        <!--app:civ_shadow="true"-->
-        <!--app:civ_shadow_radius="10"-->
-        <!--app:civ_shadow_color="#8BC34A"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--/>-->
-
-        <!--<android.support.v7.widget.AppCompatImageView-->
-            <!--android:id="@+id/imgProfile"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:layout_width="125dp"-->
-            <!--android:layout_height="125dp" />-->
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+    android:background="#e6e8ee"
+        android:clickable="true"
+        android:focusable="true"
+        android:hapticFeedbackEnabled="true"
+        android:paddingRight="16dp"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+        <!--android:background="#e6e8ee"-->
 
         <xyz.schwaab.avvylib.AvatarView
-        android:id="@+id/imgProfile"
+            android:id="@+id/imgProfile"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_gravity="center_vertical"
             app:avvy_border_highlight_color="@color/colorPrimary"
             app:avvy_border_highlight_color_end="@color/colorAccent"
-            app:avvy_border_thickness="2dp"
-            app:avvy_border_thickness_highlight="3dp"
-            app:avvy_distance_to_border="5dp"
+            app:avvy_border_thickness="1dp"
+            app:avvy_border_thickness_highlight="2dp"
+            app:avvy_distance_to_border="2dp"
+            android:hapticFeedbackEnabled="true"
             app:avvy_highlighted="true"
-            app:avvy_loading_arches="5"
-            tools:src="@drawable/einstein"
-            app:avvy_loading_arches_degree_area="90"/>
+            tools:src="@drawable/einstein" />
+
+        <!--app:avvy_loading_arches="5"-->
+        <!--app:avvy_loading_arches_degree_area="90"-->
         <!--app:avvy_border_color="@color/grey400"-->
 
         <!--android:src="@drawable/image"-->
         <TextView
+            android:hapticFeedbackEnabled="true"
             android:id="@+id/txtName"
-            android:textSize="17sp"
-            android:layout_marginLeft="25dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dp"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="John Doe"
-            android:textColor="@color/colorPrimary"
-            android:layout_gravity="center_vertical" />
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            tools:text="John Doe" />
 
 
     </LinearLayout>

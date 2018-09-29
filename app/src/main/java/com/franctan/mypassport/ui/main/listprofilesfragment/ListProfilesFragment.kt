@@ -16,17 +16,18 @@ import com.franctan.models.Profile
 import com.franctan.mypassport.R
 import com.franctan.mypassport.databinding.FragmentListProfilesBinding
 import com.franctan.mypassport.ui.main.listprofilesfragment.list.ProfilesAdapter
+import com.franctan.mypassport.ui.navigation.Navigator
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_list_profiles.*
 import javax.inject.Inject
 
-class ListProfilesFragment : Fragment() {
+class ListProfilesFragment : Fragment(), ProfileClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     @Inject
-    lateinit var profilesDao: ProfilesDao
+    lateinit var navigator: Navigator
 
     private lateinit var listProfilesBinding: FragmentListProfilesBinding
     private lateinit var profilesAdapter: ProfilesAdapter
@@ -47,7 +48,7 @@ class ListProfilesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        profilesAdapter = ProfilesAdapter()
+        profilesAdapter = ProfilesAdapter(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,6 +66,10 @@ class ListProfilesFragment : Fragment() {
 
         listenForProfileUpdates()
 
+    }
+
+    override fun clicked(profile: Profile) {
+        navigator.goToViewProfile(profile.id)
     }
 
 

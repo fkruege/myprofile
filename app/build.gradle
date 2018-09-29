@@ -36,6 +36,7 @@ dependencies {
     implementation project(path: ':firebasecloudstorage')
 
     implementation Kotlin.stdLib
+    implementation Kotlin.reflection
 
     implementation DroidSupport.appcompatv7
     implementation DroidSupport.constraintLayout

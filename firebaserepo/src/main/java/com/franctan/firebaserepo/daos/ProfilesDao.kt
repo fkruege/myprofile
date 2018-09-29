@@ -20,21 +20,16 @@ class ProfilesDao
         private val listenerCreator: ListProfilesListenerCreator
 ) {
 
-
     fun getProfileListObserver(): Observable<List<Profile>> {
-        var listener: ValueEventListener? = null
+        val localDbReference = dbReference
+        return createProfileObserver(localDbReference)
+    }
 
-        return Observable
-                .create { emitter: ObservableEmitter<List<Profile>> ->
-                    listener = listenerCreator.createValueListener(emitter, profilesMapper)
-                    listener?.let { inListener -> dbReference.addValueEventListener(inListener) }
-                }
-                .doOnDispose {
-                    listener?.let { inListener ->
-                        Timber.d("Remove Reference")
-                        dbReference.removeEventListener(inListener)
-                    }
-                }
+
+    fun getOneProfileObserver(id: String): Observable<Profile> {
+        val localDbReference = dbReference.child(id)
+        return createProfileObserver(localDbReference)
+                .map { profileList -> profileList.first() }
     }
 
 
@@ -102,6 +97,30 @@ class ProfilesDao
                     .addOnSuccessListener { emitter.onComplete() }
         }
 
+    }
+
+
+//    private fun createDbReference(id: String = ""): DatabaseReference {
+//        if (id.isEmpty()) {
+//            return dbReference
+//        } else {
+//            return dbReference.child(id)
+//        }
+//    }
+
+    private fun createProfileObserver(inDbReference: DatabaseReference): Observable<List<Profile>> {
+        var listener: ValueEventListener? = null
+        return Observable
+                .create { emitter: ObservableEmitter<List<Profile>> ->
+                    listener = listenerCreator.createValueListener(emitter, profilesMapper)
+                    listener?.let { inListener -> inDbReference.addValueEventListener(inListener) }
+                }
+                .doOnDispose {
+                    listener?.let { inListener ->
+                        Timber.d("Remove Reference")
+                        inDbReference.removeEventListener(inListener)
+                    }
+                }
     }
 
 

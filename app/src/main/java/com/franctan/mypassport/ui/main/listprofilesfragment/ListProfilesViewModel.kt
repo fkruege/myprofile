@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.franctan.firebaserepo.daos.ProfilesDao
 import com.franctan.models.Profile
+import com.franctan.mypassport.ui.viewmodelsupport.SingleLiveEvent
 import com.franctan.utilities.IoScheduler
 import com.franctan.utilities.MainScheduler
 import io.reactivex.Observer
@@ -23,6 +24,9 @@ class ListProfilesViewModel
 
     private val profilesLiveData = MutableLiveData<List<Profile>>()
     private val compositeDisposable = CompositeDisposable()
+
+
+    internal val openProfileEvent = SingleLiveEvent<String>()
 
     val ProfilesLiveData: LiveData<List<Profile>>
         get() = profilesLiveData

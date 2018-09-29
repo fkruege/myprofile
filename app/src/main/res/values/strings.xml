@@ -10,4 +10,5 @@
     <string name="external_storage_access_required">External storage access permission is needed for profile photos.</string>
     <string name="external_storage_unavailable">External storage access permission is not available.</string>
     <string name="ok">OK</string>
+    <string name="personal">Personal</string>
 </resources>

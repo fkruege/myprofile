@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.franctan.models.Profile
 import com.franctan.mypassport.R
+import com.franctan.mypassport.ui.main.listprofilesfragment.ProfileClickListener
 
 
-class ProfilesAdapter : RecyclerView.Adapter<ProfilesViewHolder>() {
+class ProfilesAdapter
+constructor(private val clickListener: ProfileClickListener) : RecyclerView.Adapter<ProfilesViewHolder>() {
 
     private var profileList: List<Profile> = emptyList()
 
@@ -18,7 +20,7 @@ class ProfilesAdapter : RecyclerView.Adapter<ProfilesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilesViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_profile, parent, false)
-        return ProfilesViewHolder(view)
+        return ProfilesViewHolder(view, clickListener)
     }
 
     override fun getItemCount(): Int {
