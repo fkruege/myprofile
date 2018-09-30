@@ -31,9 +31,6 @@
                 android:background="?android:attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:title="@string/edit_profile">
                 <!--app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
 
@@ -46,8 +43,10 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:layout_marginBottom="50dp"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -78,6 +77,7 @@
                     android:id="@+id/frameProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 
@@ -237,7 +237,6 @@
             android:layout_gravity="bottom"
             app:hideOnScroll="false"
             app:backgroundTint="@color/colorPrimary"
-
             app:theme="@style/ThemeOverlay.MaterialComponents.Light">
 
             <android.support.constraint.ConstraintLayout

@@ -20,14 +20,15 @@
             android:id="@+id/txtAddMoreHobbies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="18sp"
+            android:layout_marginBottom="50dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/add_hobby"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
 
     </LinearLayout>
 
