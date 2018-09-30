@@ -11,4 +11,6 @@
     <string name="external_storage_unavailable">External storage access permission is not available.</string>
     <string name="ok">OK</string>
     <string name="personal">Personal</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="add_hobby">Add hobby</string>
 </resources>

@@ -89,6 +89,7 @@ class EditProfileFragment : Fragment() {
         listForChangeInProfileIdEvent()
         listenForSaveDoneEvent()
         listenForDeleteDoneEvent()
+        listenForCancelEvent()
     }
 
     var btnDelete: MenuItem? = null
@@ -163,8 +164,8 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun listenForSaveDoneEvent() {
-        editProfileViewModel.saveDoneEvent.observe(this, Observer {
-            navigator.goBack()
+        editProfileViewModel.saveDoneEvent.observe(this, Observer { profileId ->
+            profileId?.let { inProfileId -> navigator.goBackToViewProfile(inProfileId) }
         })
     }
 
@@ -173,6 +174,13 @@ class EditProfileFragment : Fragment() {
             navigator.goBackToListProfiles()
         })
     }
+
+    private fun listenForCancelEvent() {
+        editProfileViewModel.cancelEvent.observe(this, Observer {
+            navigator.goBack()
+        })
+    }
+
 
     private fun launchChoosePhotoIntent() {
         photoChooser.launchChoosePhotoIntent()

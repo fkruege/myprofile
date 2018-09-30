@@ -35,8 +35,9 @@ class EditProfileViewModel
     val uiProfile = UIProfileModel()
 
     internal val choosePhotoEvent = SingleLiveEvent<Void>()
-    internal val saveDoneEvent = SingleLiveEvent<Void>()
+    internal val saveDoneEvent = SingleLiveEvent<String>()
     internal val deleteDoneEvent = SingleLiveEvent<Void>()
+    internal val cancelEvent = SingleLiveEvent<Void>()
     internal val msgEvent = SingleLiveEvent<String>()
 
     val profileLiveData = MutableLiveData<Profile>()
@@ -83,8 +84,12 @@ class EditProfileViewModel
 
     }
 
+    fun cancelClick(){
+        cancelEvent.call()
+    }
 
-    fun saveProfile() {
+
+    fun saveProfileClick() {
         val profileToSave = uiProfile.mapToProfile()
         val isSaveResult = validator.isSaveValid(profileToSave)
 
@@ -124,7 +129,7 @@ class EditProfileViewModel
                 isProgressBarVisible.set(false)
                 updateModels(profile)
                 msgEvent.value = "Profile saved."
-                saveDoneEvent.call()
+                saveDoneEvent.value = profile.id
             }
 
             override fun onSubscribe(d: Disposable) {
