@@ -48,7 +48,6 @@ dependencies {
 
     implementation GoogleArch.lifeCycleRuntime
     implementation GoogleArch.lifeCycleExtensions
-//    kapt GoogleArch.lifeCycleCompiler
 
     implementation Glide.main
     kapt Glide.compiler
@@ -74,6 +73,10 @@ dependencies {
     implementation Utils.circularView
 
     testImplementation Testing.junit
+    testImplementation Testing.mockitoCore
+    testImplementation Testing.mockitoInline
+    testImplementation Testing.mockitoKotlin
+
     androidTestImplementation Testing.testRunner
     androidTestImplementation Testing.espressoCore
 }

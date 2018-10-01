@@ -20,7 +20,7 @@
             android:id="@+id/txtAddMoreHobbies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/default_small_margin"
             android:layout_marginBottom="50dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"

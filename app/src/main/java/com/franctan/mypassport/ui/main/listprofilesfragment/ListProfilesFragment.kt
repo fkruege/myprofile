@@ -87,7 +87,6 @@ class ListProfilesFragment : Fragment(), ProfileClickListener {
         navigator.goToViewProfile(profile.id)
     }
 
-
     private fun listenForProfileUpdates() {
         listProfilesViewModel
                 .ProfilesLiveData

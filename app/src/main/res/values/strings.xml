@@ -37,6 +37,18 @@
     <string name="name_descending">Name Descending</string>
     <string name="age_ascending">Age Ascending</string>
     <string name="age_descending">Age Descending</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="age">Age</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="gender">Gender</string>
+    <string name="hobby">Hobby</string>
+    <string name="cannot_edit_profile">Cannnot edit profile.</string>
+    <string name="error_saving">There was an error saving the profile.  Please try again.</string>
+    <string name="error_deleting">There was an error deleting the profile.  Please try again.</string>
+    <string name="error_enter_first_name">Please enter a first name.</string>
+    <string name="error_enter_last_name">Please enter a last name.</string>
 
 
     <string-array name="sort_options">

@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            navigator.goToListProfiles()
+            navigator.loadInitialListProfiles()
         }
     }
 

@@ -32,7 +32,6 @@
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:title="@string/edit_profile">
-                <!--app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
 
 
             </android.support.v7.widget.Toolbar>
@@ -120,16 +119,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="48dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/default_margin"
                     app:layout_constraintStart_toStartOf="@id/leftVerticalGuideline"
                     app:layout_constraintTop_toBottomOf="@id/frameProfile">
 
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/etFirstName"
+                        android:nextFocusDown="@id/etLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="First name"
+                        android:hint="@string/first_name"
                         android:inputType="textCapWords"
                         android:text="@={editProfileViewModel.uiProfile.firstName}" />
 
@@ -147,9 +147,10 @@
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/etLastName"
+                        android:nextFocusDown="@id/etAge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Last name"
+                        android:hint="@string/last_name"
                         android:inputType="textCapWords"
                         android:text="@={editProfileViewModel.uiProfile.lastName}" />
 
@@ -168,7 +169,8 @@
                         android:id="@+id/etAge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Age"
+                        android:hint="@string/age"
+                        android:nextFocusDown="@id/rdbMale"
                         android:inputType="number"
                         android:text="@={editProfileViewModel.uiProfile.age}" />
 
@@ -190,17 +192,16 @@
                         android:layout_height="wrap_content"
                         app:isMaleCheckedGender="@{editProfileViewModel.uiProfile.gender}"
                         android:onClick="@{() -> editProfileViewModel.uiProfile.setMaleClicked()}"
-                        android:text="Male" />
+                        android:text="@string/male" />
 
                     <RadioButton
                         android:id="@+id/rdbFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{() -> editProfileViewModel.uiProfile.setFemaleClicked()}"
-                        android:text="Female"
+                        android:text="@string/female"
                         app:isFemaleCheckedGender="@{editProfileViewModel.uiProfile.gender}" />
                 </RadioGroup>
-                <!--android:checked="@{editProfileViewModel.uiProfile.isFemale}"-->
 
 
                 <ImageView

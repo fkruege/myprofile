@@ -22,7 +22,6 @@ class FireBaseProfileKtTest {
                     firstname = john
                     , lastname = doe
                     , age = age3
-                    , datecreated = date1
                     , gender = "Male"
                     , hobbies = "$dance;$sing"
             )
@@ -32,7 +31,6 @@ class FireBaseProfileKtTest {
                         firstname = john
                         , lastname = doe
                         , age = age3
-                        , datecreated = date1
                         , gender = ""
                         , hobbies = "$dance;$sing"
                 )
@@ -51,7 +49,6 @@ class FireBaseProfileKtTest {
         assertEquals(john, mappedProfile.firstName)
         assertEquals(doe, mappedProfile.lastName)
         assertEquals(age3.toInt(), mappedProfile.age)
-        assertEquals(DateTime(date1.toLong()), mappedProfile.dateCreated)
         assertEquals(Gender.Male, mappedProfile.gender)
         assertTrue(mappedProfile.hobbyList.isNotEmpty())
 
@@ -66,18 +63,6 @@ class FireBaseProfileKtTest {
     fun mapToProfileBadAge() {
         val badAgeProfile = fbProfileGood.copy(age = "bad")
         badAgeProfile.mapToProfile(profileId)
-    }
-
-    @Test(expected = NumberFormatException::class)
-    fun mapToProfileBadDate1() {
-        val badDateProfile = fbProfileGood.copy(datecreated = "abc")
-        badDateProfile.mapToProfile(profileId)
-    }
-
-    @Test(expected = NumberFormatException::class)
-    fun mapToProfileBadDate2() {
-        val badDateProfile = fbProfileGood.copy(datecreated = "")
-        badDateProfile.mapToProfile(profileId)
     }
 
     @Test

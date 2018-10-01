@@ -19,7 +19,7 @@
             android:enabled="false"
             android:textColor="@android:color/black"
             android:focusable="false"
-            android:hint="Hobby" />
+            android:hint="@string/hobby" />
 
     </android.support.design.widget.TextInputLayout>
 

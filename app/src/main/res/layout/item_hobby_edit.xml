@@ -16,7 +16,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="@dimen/default_margin"
         android:id="@+id/txtInputHobby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,7 +26,7 @@
             android:inputType="textCapWords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Hobby" />
+            android:hint="@string/hobby" />
 
     </android.support.design.widget.TextInputLayout>
 

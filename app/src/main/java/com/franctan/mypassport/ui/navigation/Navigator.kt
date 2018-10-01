@@ -17,14 +17,18 @@ class Navigator
         private val activity: AppCompatActivity
 ) {
 
-    fun goToListProfiles() {
+    fun loadInitialListProfiles() {
         val fragment = ListProfilesFragment.newInstance()
-        replaceFragment(fragment)
+        replaceFragmentNoBackStack(fragment)
     }
 
 
     fun goBackToListProfiles() {
-        activity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        val fragmentManager = activity.supportFragmentManager
+
+        while(fragmentManager.backStackEntryCount > 0){
+            fragmentManager.popBackStackImmediate()
+        }
     }
 
     fun goToViewProfile(profileId: String) {
@@ -36,7 +40,7 @@ class Navigator
         val fragmentManager = activity.supportFragmentManager
         val findFragment = fragmentManager.findFragmentByTag(ViewProfileFragment::class.simpleName)
         if (findFragment == null) {
-            activity.supportFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            activity.supportFragmentManager.popBackStackImmediate()
             val fragment = ViewProfileFragment.newInstance(profileId)
             replaceFragment(fragment)
         } else {
@@ -63,7 +67,6 @@ class Navigator
     fun goBack() {
         activity.supportFragmentManager.popBackStack()
     }
-
 
     private fun replaceFragment(newFragment: Fragment) {
         val fragmentManager = activity.supportFragmentManager

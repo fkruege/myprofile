@@ -1,12 +1,13 @@
 package com.franctan.mypassport.ui.main.editprofilefragment
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import android.net.Uri
 import com.franctan.firebaserepo.daos.IndividualProfileDao
 import com.franctan.models.Profile
+import com.franctan.mypassport.R
+import com.franctan.mypassport.ui.common.ContextHelper
 import com.franctan.mypassport.ui.models.UIProfileModel
 import com.franctan.mypassport.ui.models.mapToProfile
 import com.franctan.mypassport.ui.photos.PhotoCopier
@@ -24,6 +25,7 @@ import javax.inject.Inject
 
 class EditProfileViewModel
 @Inject constructor(
+        private val contextHelper: ContextHelper,
         private val individualProfileDao: IndividualProfileDao,
         private val profileEditor: ProfileEditor,
         private val photoCopier: PhotoCopier,
@@ -45,9 +47,6 @@ class EditProfileViewModel
     private val compositeDisposable = CompositeDisposable()
 
     val isProgressBarVisible = ObservableBoolean(false)
-
-    val ProfileLiveData: LiveData<Profile>
-        get() = this.profileLiveData
 
     val isDeleteBtnVisible: Boolean
         get() = this.profileLiveData.value?.id?.isNotEmpty() == true
@@ -78,7 +77,7 @@ class EditProfileViewModel
 
                     override fun onError(e: Throwable) {
                         Timber.e(e)
-                        msgEvent.value = "Cannnot edit profile."
+                        msgEvent.value = contextHelper.getString(R.string.cannot_edit_profile)
                     }
                 })
 
@@ -87,7 +86,6 @@ class EditProfileViewModel
     fun cancelClick(){
         cancelEvent.call()
     }
-
 
     fun saveProfileClick() {
         val profileToSave = uiProfile.mapToProfile()
@@ -139,7 +137,7 @@ class EditProfileViewModel
 
             override fun onError(e: Throwable) {
                 isProgressBarVisible.set(false)
-                msgEvent.value = "There was an error saving the profile.  Please try again."
+                msgEvent.value = contextHelper.getString(R.string.error_saving)
             }
         }
     }
@@ -157,7 +155,7 @@ class EditProfileViewModel
             }
 
             override fun onError(e: Throwable) {
-                msgEvent.value = "There was an error deleting the profile.  Please try again."
+                msgEvent.value = contextHelper.getString(R.string.error_deleting)
             }
         }
     }

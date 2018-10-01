@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             app:useCompatPadding="true"
             android:onClick="@{() -> listProfileViewModel.addNewProfileClick()}"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_add_white_24dp"
             app:layout_anchorGravity="bottom|end"
             app:layout_anchor="@id/rvProfiles" />
 

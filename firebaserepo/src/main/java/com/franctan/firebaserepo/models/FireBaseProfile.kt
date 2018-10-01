@@ -76,7 +76,7 @@ fun Profile.mapToFireBaseProfile(): FireBaseProfile {
     return FireBaseProfile(firstName, lastName, age, gender, hobbies, profilePhotoPath)
 }
 
-private fun String.toHobbiesList(): List<String> {
+internal fun String.toHobbiesList(): List<String> {
     val trimmed = this.trim()
     return if (trimmed.isEmpty()) {
         emptyList()

@@ -39,14 +39,13 @@ class ListSorter
 
     private fun sortProfiles(profiles: List<Profile>, sortOptions: SortOptions): List<Profile> {
         if (sortOptions == SortOptions.NAME_DESC) {
-            return profiles.sortedByDescending { it.firstName }
+            return profiles.sortedWith(compareByDescending<Profile> { it.firstName }.thenByDescending { it.lastName })
         } else if (sortOptions == SortOptions.AGE_ASC) {
             return profiles.sortedBy { it.age }
         } else if (sortOptions == SortOptions.AGE_DESC) {
             return profiles.sortedByDescending { it.age }
         } else {
-            return profiles.sortedBy { it.firstName }
-
+            return profiles.sortedWith(compareBy({ it.firstName }, { it.lastName }))
         }
 
     }
