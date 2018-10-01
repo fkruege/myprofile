@@ -37,7 +37,6 @@ class PhotoCopier
 
     }
 
-    //    @Throws(IOException::class)
     fun copyStream(input: InputStream, output: OutputStream) {
 
         val buffer = ByteArray(1024)

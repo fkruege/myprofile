@@ -49,41 +49,6 @@ class FileStorageDao
 
 
     }
-//
-//    abstract inner class Task<TResult> {
-//
-//        abstract val isComplete: Boolean
-//
-//        abstract val isSuccessful: Boolean
-//
-//        abstract val isCanceled: Boolean
-//
-//        abstract val result: TResult
-//
-//        @get:Nullable
-//        abstract val exception: Exception
-//
-//        @Throws(X::class)
-//        abstract fun <X : Throwable> getResult(@NonNull var1: Class<X>): TResult
-//
-//        @NonNull
-//        abstract fun addOnSuccessListener(@NonNull var1: OnSuccessListener<in TResult>): Task<TResult>
-//
-//        @NonNull
-//        abstract fun addOnSuccessListener(@NonNull var1: Executor, @NonNull var2: OnSuccessListener<in TResult>): Task<TResult>
-//
-//        @NonNull
-//        abstract fun addOnSuccessListener(@NonNull var1: Activity, @NonNull var2: OnSuccessListener<in TResult>): Task<TResult>
-//
-//        @NonNull
-//        abstract fun addOnFailureListener(@NonNull var1: OnFailureListener): Task<TResult>
-//
-//        @NonNull
-//        abstract fun addOnFailureListener(@NonNull var1: Executor, @NonNull var2: OnFailureListener): Task<TResult>
-//
-//    }
-
-
 }
 
 
