@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.franctan.lonelyplanetcurrencyguide.injection.view_model.ViewModelFactory
 import com.franctan.models.Profile
 import com.franctan.mypassport.R
@@ -51,21 +49,38 @@ class ListProfilesFragment : Fragment(), ProfileClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+
         listProfilesBinding = FragmentListProfilesBinding.inflate(inflater, container, false)
         listProfilesBinding.listProfileViewModel = listProfilesViewModel
         return listProfilesBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+        if (item.itemId == R.id.btnFilter) {
+            navigator.goToFilterDialog()
+        } else if (item.itemId == R.id.btnSort) {
+            navigator.goToSortDialog()
+        } else if (item.itemId == R.id.btnClear) {
+            listProfilesViewModel.clearFilterAndSort()
+        }
+        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar()
-        setupBottomBarMenu()
         setupRecyclerView()
 
         listenForProfileUpdates()
         listenForAddNewProfileEvent()
-
     }
 
     override fun clicked(profile: Profile) {
@@ -83,14 +98,8 @@ class ListProfilesFragment : Fragment(), ProfileClickListener {
 
     private fun setupToolbar() {
         val toolbar = toolbar
-        //        toolbar.title = "Passport Profiles"
         val parentActivity: AppCompatActivity = this.activity as AppCompatActivity
         parentActivity.setSupportActionBar(toolbar)
-    }
-
-
-    private fun setupBottomBarMenu() {
-        bottom_appbar.replaceMenu(R.menu.menu)
     }
 
     private fun setupRecyclerView() {

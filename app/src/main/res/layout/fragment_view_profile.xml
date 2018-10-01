@@ -58,8 +58,6 @@
                     android:layout_height="?android:attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
-                <!--app:customTitle="@{viewProfileViewModel.uiProfile.fullName}"-->
-                <!--app:title="@={viewProfileViewModel.uiProfile.fullName}"-->
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
@@ -67,14 +65,14 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:genderBackgroundColor="@{viewProfileViewModel.uiProfile.gender}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                >
+                android:layout_marginEnd="16dp">
 
 
                 <android.support.constraint.Guideline
@@ -134,12 +132,11 @@
                         android:focusable="false"
                         android:hint="Gender"
                         android:inputType="number"
-                        android:text="@={viewProfileViewModel.uiProfile.genderAsString}"
                         android:textColor="@android:color/black"
+                        app:genderAsString="@{viewProfileViewModel.uiProfile.gender}"
                         tools:text="Male" />
 
                 </android.support.design.widget.TextInputLayout>
-
 
 
                 <ImageView
@@ -149,7 +146,7 @@
                     android:layout_marginTop="24dp"
                     android:src="@drawable/ic_hobbies"
                     app:layout_constraintStart_toStartOf="@id/leftVerticalGuideline"
-                    app:layout_constraintTop_toBottomOf="@id/txtLayoutGender"/>
+                    app:layout_constraintTop_toBottomOf="@id/txtLayoutGender" />
 
                 <com.franctan.mypassport.ui.customviews.ViewHobbiesListView
                     android:id="@+id/viewHobbiesList"

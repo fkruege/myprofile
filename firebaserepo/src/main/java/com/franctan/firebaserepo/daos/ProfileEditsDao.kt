@@ -7,7 +7,6 @@ import com.franctan.models.Profile
 import com.google.firebase.database.DatabaseReference
 import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.SingleEmitter
 import javax.inject.Inject
 
 class ProfileEditsDao
@@ -32,25 +31,20 @@ class ProfileEditsDao
     }
 
     fun updateProfile(profile: Profile): Single<Profile> {
-        return Single.create { emitter: SingleEmitter<Profile> ->
+        return Single.fromCallable {
             val key = profile.id
             val childUpdates = mutableMapOf<String, Any>()
             childUpdates[key] = profile.mapToUpdateMap()
 
             dbReference.updateChildren(childUpdates)
-                    .addOnFailureListener { ex -> emitter.onError(ex) }
-                    .addOnSuccessListener { emitter.onSuccess(profile) }
-
+            profile
         }
     }
 
     fun deleteProfile(profile: Profile): Completable {
-        return Completable.create { emitter ->
+        return Completable.fromAction {
             dbReference.child(profile.id).removeValue()
-                    .addOnFailureListener { ex -> emitter.onError(ex) }
-                    .addOnSuccessListener { emitter.onComplete() }
         }
-
     }
 
 }

@@ -3,7 +3,7 @@
     <string name="sampleHobbies">Golf\nBasketball\nBaseball\nFishing\nRunning\n\nChess\nCheckers\n\Badminton\nCricket\nSquash\nWeights\nSitting\n</string>
 
 
-    <string name="passport_profiles">Passport Profiles</string>
+    <string name="passport_profiles">Profiles</string>
 
     <string name="select_photo">Select Photo</string>
 
@@ -13,4 +13,36 @@
     <string name="personal">Personal</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="add_hobby">Add hobby</string>
+    <string name="filter_by">Filter by</string>
+    <string name="females">Females</string>
+    <string name="males">Males</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
+
+
+    <string name="default_filter">@string/show_all</string>
+    <string name="show_all">Show all</string>
+    <string name="males_only">Males only</string>
+    <string name="females_only">Females only</string>
+    <string-array name="filter_options">
+        <item>@string/default_filter</item>
+        <item>@string/males_only</item>
+        <item>@string/females_only</item>
+    </string-array>
+
+
+    <string name="default_name_sort">@string/name_ascending</string>
+    <string name="name_ascending">Name Ascending</string>
+    <string name="name_descending">Name Descending</string>
+    <string name="age_ascending">Age Ascending</string>
+    <string name="age_descending">Age Descending</string>
+
+
+    <string-array name="sort_options">
+        <item>@string/name_ascending</item>
+        <item>@string/name_descending</item>
+        <item>@string/age_ascending</item>
+        <item>@string/age_descending</item>
+    </string-array>
 </resources>

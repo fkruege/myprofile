@@ -130,6 +130,7 @@ object Rx {
     val replay = "com.jakewharton.rx2:replaying-share:2.0.1"
     val reactiveNetwork = "com.github.pwittchen:reactivenetwork-rx2:2.1.0"
     val rxLint = "nl.littlerobots.rxlint:rxlint:1.6.1"
+    val rxPreferences = "com.f2prateek.rx.preferences2:rx-preferences:2.0.0"
 
 }
 
@@ -215,7 +216,9 @@ object Utils {
 
     val nimBus = "com.nimbusds:nimbus-jose-jwt:4.34.2"
 
-    val circularView = "com.mikhaellopez:circularimageview:3.2.0"
+    val circularView = "xyz.schwaab:avvylib:0.0.1"
+    val materialDialogs = "com.afollestad.material-dialogs:color:2.0.0-beta2"
+
 }
 
 object Maps {

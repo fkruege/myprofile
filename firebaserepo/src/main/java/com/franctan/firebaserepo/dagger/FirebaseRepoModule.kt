@@ -3,6 +3,7 @@ package com.franctan.firebaserepo.dagger
 import com.franctan.firebaserepo.PROFILES_DB
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Logger
 import dagger.Module
 import dagger.Provides
 import javax.inject.Qualifier
@@ -17,9 +18,13 @@ annotation class ProfilesDatabaseReference
 class FirebaseRepoModule {
 
     @Provides
+    @Singleton
     @ProfilesDatabaseReference
     fun provideDatabaseReference(): DatabaseReference {
-        return FirebaseDatabase.getInstance().reference.child(PROFILES_DB)
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        firebaseDatabase.setLogLevel(Logger.Level.DEBUG)
+        firebaseDatabase.setPersistenceEnabled(true)
+        return firebaseDatabase.reference.child(PROFILES_DB)
     }
 
 }

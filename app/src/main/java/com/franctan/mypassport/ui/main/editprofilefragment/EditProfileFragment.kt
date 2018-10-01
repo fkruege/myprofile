@@ -44,6 +44,8 @@ class EditProfileFragment : Fragment() {
 
     lateinit var editProfileBinding: FragmentEditProfileBinding
 
+    private var btnDelete: MenuItem? = null
+
     companion object {
         fun newInstance(profileId: String): EditProfileFragment {
             val arguments = Bundle()
@@ -92,7 +94,6 @@ class EditProfileFragment : Fragment() {
         listenForCancelEvent()
     }
 
-    var btnDelete: MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.editprofile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)

@@ -15,17 +15,16 @@
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-    android:background="#e6e8ee"
+        android:background="@color/colorLightComplementary"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:hapticFeedbackEnabled="true"
-        android:paddingRight="16dp"
         android:orientation="horizontal"
+        android:paddingLeft="16dp"
         android:paddingTop="8dp"
+        android:paddingRight="16dp"
         android:paddingBottom="8dp">
-        <!--android:background="#e6e8ee"-->
 
         <xyz.schwaab.avvylib.AvatarView
             android:id="@+id/imgProfile"
@@ -40,25 +39,20 @@
             app:avvy_highlighted="true"
             tools:src="@drawable/einstein" />
 
-        <!--app:avvy_loading_arches="5"-->
-        <!--app:avvy_loading_arches_degree_area="90"-->
-        <!--app:avvy_border_color="@color/grey400"-->
-
-        <!--android:src="@drawable/image"-->
         <TextView
-            android:hapticFeedbackEnabled="true"
             android:id="@+id/txtName"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="25dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:ellipsize="end"
+            android:focusable="true"
+            android:hapticFeedbackEnabled="true"
             android:maxLines="1"
             android:textColor="@android:color/black"
             android:textSize="17sp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
             tools:text="John Doe" />
 
 

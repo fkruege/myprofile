@@ -3,15 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/next_btn"
-        android:checked="true"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Item"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/btnFilter"
+        android:icon="@drawable/ic_filter_list"
+        android:title="Filter"
+        app:showAsAction="always" />
+
 
     <item
+        android:id="@+id/btnSort"
+        android:icon="@drawable/ic_sort"
+        android:title="Sort"
+        app:showAsAction="always" />
 
-        android:id="@+id/action_settings"
-        android:title="Settings" />
+
+    <item
+        android:id="@+id/btnClear"
+        android:icon="@drawable/ic_clear_all"
+        android:title="Clear"
+        app:showAsAction="always" />
+
+
+
 
 </menu>

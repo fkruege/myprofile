@@ -9,13 +9,11 @@
             type="com.franctan.mypassport.ui.main.listprofilesfragment.ListProfilesViewModel" />
     </data>
 
-
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
-        <!--android:background="@android:color/holo_red_dark"-->
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -32,47 +30,27 @@
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 android:fitsSystemWindows="true"
                 app:title="@string/passport_profiles" />
-            <!--app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
 
         </android.support.design.widget.AppBarLayout>
 
-
-        <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvProfiles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
+            android:background="@color/colorLightComplementary"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <!--</FrameLayout>-->
-
-
-        <android.support.design.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:backgroundTint="@color/colorPrimary"
-            app:fabAlignmentMode="end"
-            app:fabCradleVerticalOffset="12dp"
-            app:hideOnScroll="true"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:theme="@style/ThemeOverlay.MaterialComponents.Light" />
-        <!--app:fabAttached="true"-->
-        <!--app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
+            app:useCompatPadding="true"
             android:onClick="@{() -> listProfileViewModel.addNewProfileClick()}"
             android:src="@drawable/ic_add"
-            app:layout_anchor="@+id/bottom_appbar" />
+            app:layout_anchorGravity="bottom|end"
+            app:layout_anchor="@id/rvProfiles" />
 
 
     </android.support.design.widget.CoordinatorLayout>

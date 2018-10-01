@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.franctan.mypassport.R
-import com.franctan.mypassport.ui.main.editprofilefragment.EditProfileFragment
-import com.franctan.mypassport.ui.main.listprofilesfragment.ListProfilesFragment
-import com.franctan.mypassport.ui.main.viewprofilefragment.ViewProfileFragment
+import com.franctan.mypassport.ui.navigation.Navigator
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -18,6 +16,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Fragment>
 
+    @Inject
+    lateinit var navigator: Navigator
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -26,14 +27,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-//                    .replace(R.id.container, EditProfileFragment.newInstance(""))
-                    .replace(R.id.container, ListProfilesFragment.newInstance())
-//                    .replace(R.id.container, ViewProfileFragment.newInstance("-LNTnOYE7BcGhH_dKhIl"))
-                    .commit()
+            navigator.goToListProfiles()
         }
-
-
     }
 
 

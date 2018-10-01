@@ -68,19 +68,6 @@ class UIProfileModel : Observable {
             propertyChangeRegistry.notifyChange(this, BR.profilePhotoPath)
         }
 
-    var isMale: Boolean = false
-        @Bindable get() {
-            return gender == Gender.Male
-        }
-
-    var isFemale: Boolean = false
-        @Bindable get() {
-            return gender == Gender.Female
-        }
-
-    var genderAsString: String = ""
-        @Bindable get() = this.gender.toString()
-
     fun setMaleClicked() {
         gender = Gender.Male
     }

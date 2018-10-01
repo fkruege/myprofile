@@ -40,23 +40,10 @@ class ProfileObserverCreator
                 }
                 .doOnDispose {
                     listener?.let { inListener ->
-                        Timber.d("Remove Reference")
                         inDbReference.removeEventListener(inListener)
                     }
                 }
     }
-//
-//
-//    internal fun <T> createProfileListObserver(inDbReference: DatabaseReference, inListener: ValueEventListener): Observable<T> {
-//        return Observable
-//                .create { emitter: ObservableEmitter<T> ->
-//                    inDbReference.addValueEventListener(inListener)
-//                }
-//                .doOnDispose {
-//                    Timber.d("Remove Reference")
-//                    inDbReference.removeEventListener(inListener)
-//                }
-//    }
 
 }
 
