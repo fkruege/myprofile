@@ -49,6 +49,9 @@
     <string name="error_deleting">There was an error deleting the profile.  Please try again.</string>
     <string name="error_enter_first_name">Please enter a first name.</string>
     <string name="error_enter_last_name">Please enter a last name.</string>
+    <string name="clear">Clear</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
 
 
     <string-array name="sort_options">
