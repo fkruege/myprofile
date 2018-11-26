@@ -1,1 +1,2 @@
-include ':app', ':buildSrc', ':test', ':firebaserepo', ':models', ':utilities', ':firebasecloudstorage'
+include ':app', ':appnetflixstruct', ':buildSrc', ':test', ':firebaserepo', ':models', ':utilities', ':firebasecloudstorage'
+

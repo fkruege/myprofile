@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        applicationId "com.franctan.mypassport"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':models')
+    implementation project(path: ':utilities')
+    implementation project(path: ':firebaserepo')
+    implementation project(path: ':firebasecloudstorage')
+
+    implementation Kotlin.stdLib
+    implementation Kotlin.reflection
+
+    implementation DroidSupport.appcompatv7
+    implementation DroidSupport.constraintLayout
+    implementation DroidSupport.design
+    implementation DroidSupport.v4Support
+    implementation DroidSupport.recyclerView
+    implementation DroidSupport.constraintLayout
+    implementation DroidSupport.cardView
+
+    implementation GoogleArch.lifeCycleRuntime
+    implementation GoogleArch.lifeCycleExtensions
+
+    implementation Glide.main
+    kapt Glide.compiler
+
+    implementation Dagger.main
+    kapt Dagger.compiler
+    implementation Dagger.android
+    implementation Dagger.androidSupport
+    kapt Dagger.androidProcessor
+
+    implementation Firebase.core
+    implementation Firebase.database
+    implementation Firebase.cloudStorage
+
+    implementation Rx.rx2Main
+    implementation Rx.rx2Android
+    implementation Rx.rxPreferences
+
+    implementation Utils.javaxValidation
+    implementation Utils.javaxAnnotation
+    implementation Utils.timber
+    implementation Utils.jodaTime
+    implementation Utils.circularView
+
+    testImplementation Testing.junit
+    testImplementation Testing.mockitoCore
+    testImplementation Testing.mockitoInline
+    testImplementation Testing.mockitoKotlin
+
+    androidTestImplementation Testing.testRunner
+    androidTestImplementation Testing.espressoCore
+}
